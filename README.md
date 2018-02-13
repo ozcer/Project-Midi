@@ -9,5 +9,5 @@ strongest hackathon project
 - [x] Oscar
 - [ ] Anas
 - [ ] Tony
-- [ ] Allan
+- [x] Allan
 - [ ] William
