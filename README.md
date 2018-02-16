@@ -7,7 +7,7 @@ strongest hackathon project
 
 # Mark yourself off if you've read this and confirmed going
 - [x] Oscar
-- [ ] Anas
+- [x] Anas
 - [ ] Tony
 - [x] Allan
 - [ ] William
