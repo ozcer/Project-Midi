@@ -1,13 +1,13 @@
 import sys
-import controller 
-import GameObjects
+import controller
+from game_objects import *
 import pygame.locals
 
 pygame.init()
 
 WIDTH = 350
 HEIGHT = 400
-DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+MAINSURF = pygame.display.set_mode((WIDTH, HEIGHT))
 
 pygame.display.set_caption('Hello World!')
 
@@ -18,12 +18,9 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 ctrl = controller.Controller()
-
-station1 = GameObjects.Station([100, 100])
-
+t1 = Track([])
 while True:  # main game loop
-    DISPLAYSURF.fill(WHITE)
-    station1.drawStation(DISPLAYSURF)
+    MAINSURF.fill(WHITE)
     
     ctrl.tick()
     
