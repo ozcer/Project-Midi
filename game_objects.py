@@ -39,7 +39,8 @@ class Station(GameObject):
         self.tracks.append(track)
     
     def draw(self):
-        pygame.draw.rect(self.surface, (0, 0, 255), [self.x, self.y, self.stationSize, self.stationSize])
+        pygame.draw.rect(self.surface, (0, 0, 255), [self.x - (self.stationSize/2), self.y-(self.stationSize/2), self.stationSize, self.stationSize])
+
     
     def tick(self):
         pass
