@@ -18,6 +18,8 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 ctrl = controller.Controller()
+sta1 = Station((50,50))
+ctrl.entities.append(sta1)
 while True:  # main game loop
     MAINSURF.fill(WHITE)
     
