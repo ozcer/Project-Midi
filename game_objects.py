@@ -56,7 +56,7 @@ class Train(GameObject):
         self.track = None
         self.speed = 5
         self.x, self.y = parked_station.x, parked_station.y
-        self.sprite = pygame.Rect(self.x, self.y, 50, 10)
+        self.dimensions = (30, 10)
         self.surface = surface
         self.color = GREEN
 
@@ -66,7 +66,8 @@ class Train(GameObject):
             pass
     
     def draw(self):
-        pygame.draw.rect(self.surface, self.color, self.sprite)
+        center_sprite = pygame.Rect(self.x - (self.dimensions[0]/2), self.y-(self.dimensions[1]/2), *self.dimensions)
+        pygame.draw.rect(self.surface, self.color, center_sprite)
         
     def tick(self):
         pass
