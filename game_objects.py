@@ -55,7 +55,7 @@ class Train(GameObject):
     
     def __init__(self, parked_station, route, surface):
         self.destination = (0,0)
-        self.speed = 5
+        self.speed = 1
         self.x, self.y = parked_station.x, parked_station.y
         self.dimensions = (30, 10)
         self.angle = 0
@@ -77,20 +77,22 @@ class Train(GameObject):
         return atan2(-y_dist, x_dist) % (2 * pi)
 
     def project(self):
-        return (self.x + (cos(self.angle) * self.speed),
-                self.y - (sin(self.angle) * self.speed))
+        return (round(self.x + (cos(self.angle) * self.speed)),
+                round(self.y - (sin(self.angle) * self.speed)))
     
     def draw(self):
         pygame.draw.rect(self.surface, self.color, self.sprite)
         
     def tick(self):
-        print(self.i)
+        print(self.i, len(self.track.breakpoints))
+        print(self.x, self.y)
         self.angle = self.get_angle(self.destination)
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)
         if (self.x, self.y) == self.destination:
-            if self.i == len(self.track.breakpoints)-1:
+            print("reached!")
+            self.i += 1
+            if self.i > len(self.track.breakpoints)-1:
                 self.destination = (self.track.end_station.x, self.track.end_station.y)
             else:
-                self.i += 1
                 self.destination = self.track.breakpoints[self.i]

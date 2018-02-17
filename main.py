@@ -24,7 +24,7 @@ ctrl.entities.append(sta1)
 sta2 = Station((250,250), MAINSURF)
 ctrl.entities.append(sta2)
 
-trk1 = Track(sta1, sta2, [(250, 50), (150,150)], MAINSURF)
+trk1 = Track(sta1, sta2, [(250, 50), (200,150)], MAINSURF)
 ctrl.entities.append(trk1)
 
 trn1 = Train(sta1, "my_route", MAINSURF)
