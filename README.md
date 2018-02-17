@@ -10,4 +10,3 @@ strongest hackathon project
 - [x] Anas
 - [ ] Tony
 - [x] Allan
-- [ ] William
