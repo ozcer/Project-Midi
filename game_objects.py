@@ -20,5 +20,17 @@ class Track(GameObject):
         point_list.append((self.end_station.x, self.end_station.y))
         pygame.draw.lines(MAINSURF, self.color, False, point_list)
 
-class Station(GameObject):
-    pass
+class Station:
+    
+    def __init__(self, pos: (int, int)):
+        self.tracks = []
+        self.x = pos[0]
+        self.y = pos[1]
+        self.stationSize = 10
+        print("created station obj")
+    
+    def addTrack(self, track):
+        self.tracks.append(track)
+    
+    def drawStation(self, surface):
+        pygame.draw.rect(surface, (0, 0, 255), [self.x, self.y, self.stationSize, self.stationSize])
