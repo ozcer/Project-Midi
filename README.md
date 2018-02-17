@@ -6,7 +6,7 @@ strongest hackathon project
 * Feb 17 10:00am - Feb 18 1:15pm
 
 # Mark yourself off if you've read this and confirmed going
-- [x] Oscar
+- [x] xxxOscarxxx
 - [x] Anas
 - [x] Tony
 - [x] Allan
