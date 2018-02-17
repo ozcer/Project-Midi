@@ -1,5 +1,4 @@
 import sys
-import player
 import controller
 
 import pygame.locals
@@ -19,7 +18,6 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 ctrl = controller.Controller()
-ctrl.entities.append(player)
 
 while True:  # main game loop
     DISPLAYSURF.fill(WHITE)
