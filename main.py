@@ -18,8 +18,14 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 ctrl = controller.Controller()
-sta1 = Station((50,50))
+sta1 = Station((50,50), MAINSURF)
 ctrl.entities.append(sta1)
+
+sta2 = Station((250,250), MAINSURF)
+ctrl.entities.append(sta2)
+
+t1 = Track(sta1, sta2, [(250, 50), (150,150)], MAINSURF)
+ctrl.entities.append(t1)
 while True:  # main game loop
     MAINSURF.fill(WHITE)
     
