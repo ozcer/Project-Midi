@@ -28,7 +28,10 @@ trk1 = Track(sta1, sta2, [(250, 50), (150,150)], MAINSURF)
 ctrl.entities.append(trk1)
 
 trn1 = Train(sta1, "my_route", MAINSURF)
+sta1.send(trn1, trk1)
 ctrl.entities.append(trn1)
+
+
 while True:  # main game loop
     MAINSURF.fill(WHITE)
     
