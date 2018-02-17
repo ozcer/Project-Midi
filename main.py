@@ -1,6 +1,6 @@
 import sys
-import controller
-
+import controller 
+import GameObjects
 import pygame.locals
 
 pygame.init()
@@ -19,8 +19,11 @@ BLUE = (0, 0, 255)
 
 ctrl = controller.Controller()
 
+station1 = GameObjects.Station([100, 100])
+
 while True:  # main game loop
     DISPLAYSURF.fill(WHITE)
+    station1.drawStation(DISPLAYSURF)
     
     ctrl.tick()
     
