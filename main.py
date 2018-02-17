@@ -18,7 +18,6 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 ctrl = controller.Controller()
-t1 = Track([])
 while True:  # main game loop
     MAINSURF.fill(WHITE)
     
