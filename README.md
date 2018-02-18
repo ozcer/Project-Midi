@@ -7,4 +7,4 @@ Gondaola Tycoon 2018
 * Python3
 * Pygame
 
-clone and run `python3 main.py`
+clone and run `python3 main.py` in repo directory
