@@ -18,15 +18,14 @@ DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
 
 #Our main menu function now returns our map choice, fyi
 map_choice = start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
-
+bg = pygame.image.load(map_choice + ".png").convert()
+bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
+ctrl = controller.Controller(MAINSURF)
 if map_choice == "tokyo":
-    bg = pygame.image.load("tokyo.png").convert()
-    bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
-    ctrl = controller.Controller(MAINSURF)
     station1 = Station((198, 162), MAINSURF, "Mount Keefer")
     ctrl.entities.append(station1)
 
-    station2 = Station((882, 105), MAINSURF, "Mount Dogger")
+    station2 = Station((920, 540), MAINSURF, "The Spire")
     ctrl.entities.append(station2)
 
     station3 = Station((161, 410), MAINSURF, "The Peaks")
@@ -61,10 +60,6 @@ if map_choice == "tokyo":
     selected_stations = []
 
 if map_choice == "london":
-    bg = pygame.image.load("london.png").convert()
-    bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
-    ctrl = controller.Controller(MAINSURF)
-
     station1 = Station((382, 363), MAINSURF, "Wery's Pass")
     ctrl.entities.append(station1)
 
@@ -103,16 +98,29 @@ if map_choice == "london":
     selected_stations = []
 
 if map_choice == "free":
-    bg = pygame.image.load(map_choice + ".png").convert()
-    bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
-    ctrl = controller.Controller(MAINSURF)
-
     selected_stations = []
 
+tooltip = {"msg":"", "pos":(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2), "time":200}
+ttfont = pygame.font.SysFont(None, 20)
+def draw_tooltip():
+    if tooltip["time"] > 0:
+        text_surf = ttfont.render(tooltip["msg"], True, RED)
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        mouse_y -= 10
+        MAINSURF.blit(text_surf, (mouse_x, mouse_y))
+        tooltip["time"] -= 1
 
-def create_station(pos, surface):
-    new_station = Station(pos, surface)
-    ctrl.entities.append(new_station)
+
+def create_station(pos, surface, ctrl):
+    if ctrl.get_money() >= 300:
+        new_station = Station(pos, surface)
+        ctrl.entities.append(new_station)
+        ctrl.addMoney(-300)
+    else:
+        tooltip["msg"] = "NOT ENOUGH MONEY!"
+        tooltip["pos"] = mouse_pos
+        tooltip["time"] = 50
+
 
 
 def create_track(start, end, breakpoints, surface=MAINSURF):
@@ -125,16 +133,6 @@ def clear_selected_stations(select_list):
     for station in select_list:
         station.color = BLUE
     del select_list[:]
-
-tooltip = {"msg":"", "pos":(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2), "time":200}
-ttfont = pygame.font.SysFont(None, 20)
-def draw_tooltip():
-    if tooltip["time"] > 0:
-        text_surf = ttfont.render(tooltip["msg"], True, RED)
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        mouse_y -= 10
-        MAINSURF.blit(text_surf, (mouse_x, mouse_y))
-        tooltip["time"] -= 1
 
 while True:  # main game loop
     
@@ -168,11 +166,11 @@ while True:  # main game loop
                 if not clicked_on_station:
                     r, g, b, a = MAINSURF.get_at(mouse_pos)
                     if b >= 230:
-                        tooltip["msg"] = "CANNOUR BUILD THERE!"
+                        tooltip["msg"] = "CANNOT BUILD THERE!"
                         tooltip["pos"] = mouse_pos
                         tooltip["time"] = 100
                     else:
-                        create_station(mouse_pos, MAINSURF)
+                        create_station(mouse_pos, MAINSURF, ctrl)
                 else:
                     clicked_on_station.color = YELLOW
                     if len(selected_stations) == 2:
