@@ -69,7 +69,7 @@ class Station(GameObject):
 
         #draws population of each station
         [i, d] = divmod(self.populateCounter, 1)
-        text_surf = self.font.render(str(i), True, BLACK)
+        text_surf = self.font.render(f"pop: {int(i)}", True, BLACK)
         self.surface.blit(text_surf, (self.x, self.y + 25))
 
     
@@ -125,8 +125,6 @@ class Train(GameObject):
         self.surface.blit(text_surf, (self.x, self.y+10))
         
     def tick(self, controller):
-        
-        
         if self.wait_time >= 0:
             self.wait_time -= 1
             self.speed = 0
@@ -147,6 +145,7 @@ class Train(GameObject):
         self.speed = round(self.speed, 2)
         
         self.angle = self.get_angle(self.destination)
+        
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)
         # if reaches the destination
