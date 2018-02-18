@@ -57,10 +57,10 @@ class Station(GameObject):
         train.travel_track(track)
     
     def receive(self, train, controller):
-        cashout_pass = train.train_pop
+        money_delta = train.train_pop * INCOME_RATE
         train.train_pop = 0
         self.pop = train.pickup(self.pop)
-        controller.addMoney(cashout_pass)
+        controller.addMoney(money_delta)
         # print(controller.currentMoney)
         train.wait_time = FPS
         target_track = self.tracks[train.route]

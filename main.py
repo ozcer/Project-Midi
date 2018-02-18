@@ -157,7 +157,8 @@ while True:  # main game loop
                         clicked_on_station = entity
                         selected_stations.append(clicked_on_station)
                 if not clicked_on_station:
-                    if MAINSURF.get_at(mouse_pos)[2] >= 240:
+                    r, g, b, a = MAINSURF.get_at(mouse_pos)
+                    if b >= 230:
                         tooltip["msg"] = "Cannot build in water"
                         tooltip["pos"] = mouse_pos
                         tooltip["time"] = 100
