@@ -3,6 +3,7 @@ from game_objects import *
 from const import *
 
 from pygame.locals import *
+from const import *
 
 
 class Controller():
@@ -27,6 +28,17 @@ class Controller():
         rounded_fps = round(Controller.fpsClock.get_fps())
         text_surf = money_font.render("FPS: " + str(rounded_fps), True, (BLACK))
         self.surface.blit(text_surf, (10, 10))
+
+        #Legend ui
+        legend_font = pygame.font.SysFont(None, 25)
+        all_routes = set()
+        for entity in Controller.entities:
+            if type(entity) == Station:
+                for route in entity.tracks:
+                    all_routes.add(route)
+
+        legend_text = legend_font.render(f"Train route: {all_routes}", True, BLACK)
+        self.surface.blit(legend_text, (DISPLAY_WIDTH-300, DISPLAY_HEIGHT-150))
 
         pygame.display.update()
         Controller.fpsClock.tick(FPS)
