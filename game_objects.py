@@ -159,11 +159,11 @@ class Train(pygame.sprite.Sprite):
         pygame.draw.line(self.surface, self.color,
                          (self.x, self.y), self.get_head_pos(), self.dimensions[1])
         #pygame.draw.rect(self.surface, self.color, self.sprite)
-        text_surf = self.font.render(f"route: {self.route}", True, (BLACK))
+        text_surf = self.font.render("route: {}".format(self.route), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 10))
-        text_surf = self.font.render(f"speed: {self.speed}", True, (BLACK))
+        text_surf = self.font.render("speed: {}".format(self.speed), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 25))
-        text_surf = self.font.render(f"current cap: {self.train_pop}/{self.max_capacity}", True, (BLACK))
+        text_surf = self.font.render("current cap: {}/{}".format(self.train_pop, self.max_capacity), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 40))
         
     def tick(self, controller):

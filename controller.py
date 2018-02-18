@@ -36,7 +36,7 @@ class Controller():
                 for route in entity.tracks:
                     all_routes.add(route)
 
-        legend_text = legend_font.render(f"Train route: {all_routes}", True, BLACK)
+        legend_text = legend_font.render("Train route: {}".format(all_routes), True, BLACK)
         self.surface.blit(legend_text, (DISPLAY_WIDTH-300, DISPLAY_HEIGHT-150))
 
         pygame.display.update()
