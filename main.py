@@ -4,7 +4,6 @@ from const import *
 import start_screen
 from game_objects import *
 from pygame.locals import *
-import map_editor
 
 pygame.init()
 

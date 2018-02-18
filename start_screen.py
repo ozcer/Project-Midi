@@ -28,3 +28,7 @@ def message_to_screen(surface, msg, color, y_disp=0):
     screen_text = font.render(msg, True, color)
     # textRect.center = ((const.DISPLAY_WIDTH / 2), (const.DISPLAY_HEIGHT / 2)+ y_disp)
     surface.blit(screen_text, [(const.DISPLAY_WIDTH / 2), (const.DISPLAY_HEIGHT / 2)])
+
+def background(image, resolution):
+    pass
+
