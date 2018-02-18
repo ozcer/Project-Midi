@@ -6,8 +6,12 @@ from game_objects import *
 from pygame.locals import *
 
 pygame.init()
-flags = FULLSCREEN | DOUBLEBUF
-MAINSURF = pygame.display.set_mode((0,0),flags)
+pygame.mixer.init()
+pygame.mixer.set_num_channels(64)
+pygame.mixer.music.load("zelda.mp3")
+choo_sound = pygame.mixer.Sound("choo.wav")
+
+MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
 bg = pygame.image.load("tokyo.png").convert()
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
@@ -59,6 +63,7 @@ selected_stations = []
 def create_station(pos, surface):
     new_station = Station(pos, surface)
     ctrl.entities.append(new_station)
+    choo_sound.play()
 
 
 def create_track(start, end, breakpoints, surface=MAINSURF):
