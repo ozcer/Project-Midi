@@ -64,7 +64,6 @@ class Station(GameObject):
         train.train_pop = 0
         self.pop = train.pickup(self.pop)
         controller.addMoney(money_delta)
-        # print(controller.currentMoney)
         train.wait_time = FPS
         random_track = random.choice(self.tracks)
         self.send(train, random_track)
@@ -196,12 +195,7 @@ class Train(pygame.sprite.Sprite):
         else:
             self.speed = self.speed + self.accel if self.speed < self.max_speed else self.max_speed
         
-        # if self.speed == 0:
-        #     self.color = RED
-        # elif self.speed < self.max_speed:
-        #     self.color = YELLOW
-        # else:
-        #     self.color = GREEN
+
         capacity_ratio = self.train_pop/self.max_capacity
         if capacity_ratio >= 0.9:
             self.color  = RED

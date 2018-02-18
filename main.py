@@ -117,11 +117,11 @@ def draw_tooltip():
 
 
 def create_station(pos, surface, ctrl):
-    if ctrl.get_money() >= 300:
+    if ctrl.get_money() >= COST_OF_MOUNTAIN:
         random_name = "Mount " + random.choice(nouns).capitalize()
         new_station = Station(pos, surface, random_name)
         ctrl.entities.insert(0, new_station)
-        ctrl.addMoney(-300)
+        ctrl.addMoney(-COST_OF_MOUNTAIN)
     else:
         tooltip["msg"] = "NOT ENOUGH MONEY!"
         tooltip["pos"] = mouse_pos
@@ -206,7 +206,7 @@ while True:  # main game loop
                 print(selected_stations)
             elif event.button == 3:
                 clear_selected_stations(selected_stations)
-    if ctrl.get_money() <= -500:
+    if ctrl.get_money() <= BANKRUPT_AMOUNT:
                 break
 while True:
     end_screen.draw_end_screen(MAINSURF)
