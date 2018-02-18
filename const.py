@@ -20,3 +20,11 @@ FPS = 60
 POP_RATE = 2
 TRAIN_CAPACITY = 20
 INCOME_RATE = 25
+
+#Pictures
+HAPPY = pygame.image.load("happy.png")
+NEUTRAL = pygame.image.load("neutural.png")
+ANGRY = pygame.image.load("sad.png")
+HAPPYIMG = pygame.transform.scale(HAPPY, (25, 25))
+NEUTRALIMG = pygame.transform.scale(NEUTRAL, (25, 25))
+ANGRYIMG = pygame.transform.scale(ANGRY, (25, 25))

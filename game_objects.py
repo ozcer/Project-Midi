@@ -43,6 +43,8 @@ class Station(GameObject):
         self.name = name
         self.color = BLUE
 
+
+
         #passenger info
         self.populate_rate = POP_RATE
         self.pop_countdown = 100
@@ -104,6 +106,14 @@ class Station(GameObject):
             self.pop += 1
             self.pop_countdown = 100
 
+        #color of passenger
+        station_ratio = self.pop / TRAIN_CAPACITY
+        if station_ratio <= 0.5:
+            self.surface.blit(HAPPYIMG, [self.x-30, self.y+20])
+        elif station_ratio >0.5 and station_ratio <= 1:
+            self.surface.blit(NEUTRALIMG, [self.x-30, self.y+20])
+        elif station_ratio > 1:
+            self.surface.blit(ANGRYIMG, [self.x-30, self.y+20])
 
 class Train(pygame.sprite.Sprite):
     
