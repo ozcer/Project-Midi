@@ -163,10 +163,16 @@ while True:  # main game loop
         sys.exit()
         
     if keys[K_b]:
-        if ctrl.currentMoney >= TRAIN_COST and len(selected_stations)==1:
-            ctrl.addMoney(-TRAIN_COST)
-            create_train(selected_stations[0], ctrl)
-            clear_selected_stations(selected_stations)
+        if len(selected_stations)==1:
+            if ctrl.currentMoney >= TRAIN_COST:
+                ctrl.addMoney(-TRAIN_COST)
+                create_train(selected_stations[0], ctrl)
+                clear_selected_stations(selected_stations)
+            else:
+                station = selected_stations[0]
+                tooltip["msg"] = "NOT ENOUGH MONEY!"
+                tooltip["pos"] = (station.x, station.y-15)
+                tooltip["time"] = 50
 
     for event in pygame.event.get():
         if event.type == pygame.locals.QUIT:
