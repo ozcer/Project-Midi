@@ -37,10 +37,11 @@ class Station(GameObject):
         self.tracks = {} # "routeName": Track
         self.x = pos[0]
         self.y = pos[1]
-        self.dimensions = (20,20)
+        self.dimensions = (20,10)
         self.sprite = pygame.Rect(self.x, self.y, *self.dimensions)
         self.surface = surface
         self.name = name
+        self.color = BLUE
 
         #passenger info
         self.populate_rate = POP_RATE
@@ -73,8 +74,10 @@ class Station(GameObject):
 
     def draw(self):
         self.sprite.center = (self.x, self.y)
+        
         pygame.draw.circle(self.surface, GRAY, (self.x, self.y), 28)
-        pygame.draw.circle(self.surface, WHITE, (self.x, self.y), 10)
+        pygame.draw.circle(self.surface, WHITE, (self.x, self.y), 13)
+        pygame.draw.rect(self.surface, self.color, self.sprite)
         text_surf = self.font.render("({},{})".format(self.x, self.y), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 10))
 
