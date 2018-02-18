@@ -7,7 +7,8 @@ class Controller():
     
     fpsClock = pygame.time.Clock()
     
-    def __init__(self):
+    def __init__(self, surf):
+        self.surface = surf
         self.currentMoney = 0
         self.incomeRate = 1
 
@@ -15,7 +16,11 @@ class Controller():
         for entity in Controller.entities:
             entity.tick(self)
             entity.draw()
-        
+
+        money_font = pygame.font.SysFont(None, 25)
+        text_surf =  money_font.render("Money: " + str(self.currentMoney), True, (BLACK))
+        self.surface.blit(text_surf, [0, DISPLAY_HEIGHT-25])
+
         pygame.display.update()
         Controller.fpsClock.tick(FPS)
 
