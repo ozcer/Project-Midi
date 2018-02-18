@@ -28,8 +28,12 @@ class Controller():
             entity.draw()
 
         money_font = pygame.font.SysFont(None, 25)
-        text_surf =  money_font.render("Money: $" + str(self.currentMoney), True, (BLACK))
-        self.surface.blit(text_surf, (25, DISPLAY_HEIGHT-25))
+        pos_surf = money_font.render(str(self.currentMoney) + "$", True, (GREEN))
+        neg_surf = money_font.render(str(self.currentMoney) + "$", True, (RED))
+        if self.currentMoney >= 0:
+            self.surface.blit(pos_surf, (25, DISPLAY_HEIGHT-25))
+        else:
+            self.surface.blit(neg_surf, (25, DISPLAY_HEIGHT-25))
         
         rounded_fps = round(Controller.fpsClock.get_fps())
         text_surf = money_font.render("FPS: " + str(rounded_fps), True, (BLACK))
