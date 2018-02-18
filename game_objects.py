@@ -49,6 +49,7 @@ class Station(GameObject):
         
         self.color = BLUE
         self.font = pygame.font.SysFont(None, 20)
+        self.moneyMessage = ["dummy", -1]
         
     def addTrack(self, track, route):
         self.tracks[route] = track
@@ -65,6 +66,10 @@ class Station(GameObject):
         train.wait_time = FPS
         target_track = self.tracks[train.route]
         self.send(train, target_track)
+        if money_delta > 0:
+            self.moneyMessage = [str(money_delta), 25]
+
+
 
     def draw(self):
         self.sprite.center = (self.x, self.y)
@@ -81,6 +86,12 @@ class Station(GameObject):
         stationfont.set_underline(True)
         text_surf = stationfont.render(self.name, True, BLACK)
         self.surface.blit(text_surf, (self.x - 60, self.y - 40))
+
+        if self.moneyMessage[1] > 0:
+            receive_font = pygame.font.Font(None, 25)
+            receive_surf = receive_font.render("+" + self.moneyMessage[0], True, GREEN)
+            self.surface.blit(receive_surf, (self.x + 10, self.y - 10))
+            self.moneyMessage[1] -= 1
 
     
     def tick(self, controller):
