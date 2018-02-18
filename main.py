@@ -11,13 +11,16 @@ pygame.mixer.set_num_channels(64)
 pygame.mixer.music.load("ambient.mp3")
 pygame.mixer.music.play()
 
+pygame.display.set_caption('TRAIN SIMULATOR')
+
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
-bg = pygame.image.load("tokyo.png").convert()
+
+#Our main menu function now returns our map choice, fyi
+map_choice = start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
+
+bg = pygame.image.load(map_choice+".png").convert()
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
-
-
-pygame.display.set_caption('SkyTrain Sim')
 
 ctrl = controller.Controller(MAINSURF)
 station1 = Station((50, 50), MAINSURF)
@@ -54,8 +57,6 @@ train2 = Train(station3, "short", MAINSURF)
 station3.receive(train2, ctrl)
 
 ctrl.entities.append(train2)
-
-start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
 
 selected_stations = []
 

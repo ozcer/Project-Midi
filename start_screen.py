@@ -9,14 +9,14 @@ def draw_start_screen(surface, windowWidth, windowHeight):
     #startImage = pygame.transform.scale(startImage, (windowWidth, windowHeight))
     startRect = startImage.get_rect(center=(const.DISPLAY_CENTER_X, const.DISPLAY_CENTER_Y))
     inStartScreen = True
-    while inStartScreen:
+    while True:
 
         surface.blit(startImage, startRect)
 
         font = pygame.font.Font("fonty.ttf", 45)
         small_font = pygame.font.Font("fonty.ttf", 25)
         title_text = font.render("Train Simulator:", True, const.RED)
-        options_text = small_font.render("PRESS 1 FOR TOKYO, PRESS 2 FOR VANCOUVER", True, const.RED)
+        options_text = small_font.render("PRESS 1 FOR TOKYO, PRESS 2 FOR LONDON", True, const.RED)
         surface.blit(title_text, (50,50))
         surface.blit(options_text, (150, 150))
         pygame.display.update()
@@ -33,15 +33,9 @@ def draw_start_screen(surface, windowWidth, windowHeight):
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
-                    inStartScreen = False
+                    return "tokyo"
                 if event.key == pygame.K_2:
-                    inStartScreen = False
-
-
-def message_to_screen(surface, msg, color, y_disp=0):
-    font = pygame.font.SysFont(None, 25)
-    screen_text = font.render(msg, True, color)
-    surface.blit(screen_text, [(const.DISPLAY_WIDTH / 2), (const.DISPLAY_HEIGHT / 2)])
+                    return "london"
 
 def background(image, resolution):
     pass
