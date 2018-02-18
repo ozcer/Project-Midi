@@ -17,7 +17,7 @@ class Controller():
         self.surface = surf
         self.currentMoney = 0
         self.deductRate = 1000
-        self.timeUntilDeduct = 1800
+        self.timeUntilDeduct = 1000
         self.deductPeriod = 1800
 
 
@@ -27,13 +27,13 @@ class Controller():
             entity.tick(self)
             entity.draw()
 
-        money_font = pygame.font.SysFont(None, 25)
-        pos_surf = money_font.render(str(self.currentMoney) + "$", True, (GREEN))
-        neg_surf = money_font.render(str(self.currentMoney) + "$", True, (RED))
+        money_font = pygame.font.SysFont(None, 50)
+        pos_surf = money_font.render("$"+str(self.currentMoney), True, (GREEN))
+        neg_surf = money_font.render("$"+str(self.currentMoney), True, (RED))
         if self.currentMoney >= 0:
-            self.surface.blit(pos_surf, (25, DISPLAY_HEIGHT-25))
+            self.surface.blit(pos_surf, (25, DISPLAY_HEIGHT-50))
         else:
-            self.surface.blit(neg_surf, (25, DISPLAY_HEIGHT-25))
+            self.surface.blit(neg_surf, (25, DISPLAY_HEIGHT-50))
         
         rounded_fps = round(Controller.fpsClock.get_fps())
         text_surf = money_font.render("FPS: " + str(rounded_fps), True, (BLACK))
