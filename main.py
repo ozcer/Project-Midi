@@ -4,16 +4,17 @@ from const import *
 import start_screen
 from game_objects import *
 from pygame.locals import *
+import map_editor
 
 pygame.init()
 
+editorMode = True
 
 MAINSURF = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
 pygame.display.set_caption('Hello World!')
 
 
-gamestate = "START"
 
 ctrl = controller.Controller()
 station1 = Station((50, 50), MAINSURF)
@@ -68,7 +69,13 @@ while True:  # main game loop
         if event.type == pygame.locals.QUIT:
             pygame.quit()
             sys.exit()
+        if editorMode == True:
+        	if event.type == pygame.MOUSEBUTTONDOWN:
+        		print(pygame.mouse.get_pos())
+        		mousePos = pygame.mouse.get_pos()
 
+        		newStation = Station(mousePos, MAINSURF)
+        		ctrl.entities.append(newStation)
 
 
 
