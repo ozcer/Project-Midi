@@ -2,7 +2,6 @@ import pygame
 from math import sin, cos, pi, atan2, hypot
 from const import *
 
-
 def dist(destination, origin):
     return hypot(destination[0] - origin[0], destination[1] - origin[1])
 
@@ -75,9 +74,10 @@ class Train(GameObject):
         self.wait_time = 0
         self.route = route
         
-        self.max_speed = 50
+        self.max_speed = 4
         self.min_speed = 1
-        self.speed = 7
+        self.speed = 0
+        self.accel = .1
         
         self.route = route
         self.x, self.y = parked_station.x, parked_station.y
@@ -86,6 +86,8 @@ class Train(GameObject):
         self.sprite = pygame.Rect(self.x, self.y, *self.dimensions)
         self.surface = surface
         self.color = GREEN
+
+        self.font = pygame.font.SysFont(None, 20)
 
     def travel_track(self, track):
         self.break_point_index = 0
@@ -109,23 +111,31 @@ class Train(GameObject):
     
     def draw(self):
         pygame.draw.rect(self.surface, self.color, self.sprite)
+        text_surf = self.font.render("speed: " + str(self.speed), True, (BLACK))
+        self.surface.blit(text_surf, (self.x, self.y+10))
         
     def tick(self, controller):
+        
+        
         if self.wait_time >= 0:
-            self.color = RED
             self.wait_time -= 1
             self.speed = 0
         # if approaching station, slow down
         elif self.at((self.track.end_station.x, self.track.end_station.y), 75):
-            self.color = YELLOW
-            self.speed = self.speed - 0.2 if self.speed > self.min_speed else self.min_speed
+            self.speed = self.speed - self.accel if self.speed > self.min_speed else self.min_speed
         # if leaving station, speed up
-        elif self.at((self.track.start_station.x, self.track.start_station.y), 75):
+        else:
+            self.speed = self.speed + self.accel if self.speed < self.max_speed else self.max_speed
+        
+        if self.speed == 0:
+            self.color = RED
+        elif self.speed < self.max_speed:
             self.color = YELLOW
-            self.speed = self.speed + 0.2 if self.speed < self.max_speed else self.max_speed
         else:
             self.color = GREEN
-            self.speed = 4
+        
+        self.speed = round(self.speed, 2)
+        
         self.angle = self.get_angle(self.destination)
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)
