@@ -69,7 +69,7 @@ class Station(GameObject):
     def draw(self):
         self.sprite.center = (self.x, self.y)
         pygame.draw.rect(self.surface, self.color , self.sprite)
-        text_surf = self.font.render(f"({self.x},{self.y})", True, (BLACK))
+        text_surf = self.font.render("({},{})".format(self.x, self.y), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 10))
 
         #draws population of each station
