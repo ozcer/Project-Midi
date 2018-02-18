@@ -166,7 +166,7 @@ while True:  # main game loop
                 if not clicked_on_station:
                     r, g, b, a = MAINSURF.get_at(mouse_pos)
                     if b >= 230:
-                        tooltip["msg"] = "CANNOT BUILD THERE!"
+                        tooltip["msg"] = "CANNOT BUILD IN THE AIR!"
                         tooltip["pos"] = mouse_pos
                         tooltip["time"] = 100
                     else:
