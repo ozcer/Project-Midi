@@ -2,7 +2,6 @@ import pygame
 from math import sin, cos, pi, atan2, hypot
 from const import *
 import random
-from random import randint
 
 def dist(destination, origin):
     return hypot(destination[0] - origin[0], destination[1] - origin[1])
@@ -236,7 +235,7 @@ class Train(pygame.sprite.Sprite):
 class Cloud():
     def __init__(self, surface):
         self.surface = surface
-        self.y = randint(0, DISPLAY_HEIGHT)
+        self.y = random.randint(0, DISPLAY_HEIGHT)
         self.x = -600
         self.velocity = randint(1, 5)
         self.img = pygame.transform.scale(CLOUD, (randint(150,200), randint(50,100)))

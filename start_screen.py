@@ -1,13 +1,13 @@
 import pygame
-import const
 import sys
+import end_screen
 from pygame.locals import *
 from const import *
 
 # pass path as parameter
-def draw_start_screen(surface, windowWidth, windowHeight):
+def draw_start_screen(surface):
     startImage = pygame.image.load("mountain.png")
-    startRect = startImage.get_rect(center=(const.DISPLAY_CENTER_X, const.DISPLAY_CENTER_Y))
+    startRect = startImage.get_rect(center=(DISPLAY_CENTER_X, DISPLAY_CENTER_Y))
     while True:
 
         surface.fill(WHITE)

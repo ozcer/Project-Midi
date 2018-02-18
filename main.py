@@ -2,8 +2,10 @@ import sys
 import controller
 from const import *
 import start_screen
+import end_screen
 from game_objects import *
 from pygame.locals import *
+import random
 
 pygame.init()
 pygame.mixer.init()
@@ -16,8 +18,11 @@ pygame.display.set_caption('TRAIN SIMULATOR')
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
 
+with open("nouns.txt") as F:
+    nouns = F.read().splitlines()
+
 #Our main menu function now returns our map choice, fyi
-map_choice = start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
+map_choice = start_screen.draw_start_screen(MAINSURF)
 bg = pygame.image.load(map_choice + ".png").convert()
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 ctrl = controller.Controller(MAINSURF)
@@ -113,7 +118,8 @@ def draw_tooltip():
 
 def create_station(pos, surface, ctrl):
     if ctrl.get_money() >= 300:
-        new_station = Station(pos, surface)
+        random_name = "Mount " + random.choice(nouns).capitalize()
+        new_station = Station(pos, surface, random_name)
         ctrl.entities.append(new_station)
         ctrl.addMoney(-300)
     else:
@@ -180,7 +186,13 @@ while True:  # main game loop
                     if len(selected_stations) == 2:
                         create_track(selected_stations[0], selected_stations[1], [])
                         clear_selected_stations(selected_stations)
+                    elif clicked_on_station.getName() == "New Station":
+                        pass
             elif event.button == 2:
                 print(selected_stations)
             elif event.button == 3:
                 clear_selected_stations(selected_stations)
+    if ctrl.get_money() <= -500:
+                break
+while True:
+    end_screen.draw_end_screen(MAINSURF)
