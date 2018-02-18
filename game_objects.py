@@ -42,8 +42,8 @@ class Station(GameObject):
         self.surface = surface
 
         #passenger info
-        self.populate_rate = 1
-        self.pop_countdown = 200
+        self.populate_rate = POP_RATE
+        self.pop_countdown = 100
         self.pop = 0
         
         self.color = BLUE
@@ -80,7 +80,7 @@ class Station(GameObject):
         self.pop_countdown -= self.populate_rate
         if self.pop_countdown == 0:
             self.pop += 1
-            self.pop_countdown = 200
+            self.pop_countdown = 100
 
 
 class Train(pygame.sprite.Sprite):
@@ -111,7 +111,7 @@ class Train(pygame.sprite.Sprite):
         self.font = pygame.font.SysFont(None, 20)
 
         #passenger info
-        self.max_capacity = 5
+        self.max_capacity = TRAIN_CAPACITY
         self.train_pop = 0
 
     #sets the passenger count on each train object and returns leftover passengers if any
