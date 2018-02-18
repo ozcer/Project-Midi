@@ -1,6 +1,7 @@
 import pygame
 from math import sin, cos, pi, atan2, hypot
 from const import *
+import economy
 
 
 def dist(destination, origin):
@@ -13,14 +14,14 @@ class GameObject:
 
 class Track(GameObject):
     
-    def __init__(self, start_station, end_station, breakpoints: [(int, int)], surface):
+    def __init__(self, start_station, end_station, breakpoints: (int, int), surface):
         self.breakpoints = breakpoints
         self.start_station = start_station
         self.end_station = end_station
         self.color = BLACK
         self.surface = surface
     
-    def tick(self):
+    def tick(self, controller):
         pass
     
     def draw(self):
@@ -47,16 +48,20 @@ class Station(GameObject):
     def send(self, train, track):
         train.travel_track(track)
     
-    def receive(self, train):
+    def receive(self, train, controller):
+        controller.addMoney()
+        print(controller.currentMoney)
         train.wait_time = FPS
         target_track = self.tracks[train.route]
         self.send(train, target_track)
+
+
     
     def draw(self):
         pygame.draw.rect(self.surface, (0, 0, 255), [self.x - (self.stationSize/2), self.y-(self.stationSize/2), self.stationSize, self.stationSize])
 
     
-    def tick(self):
+    def tick(self, controller):
         pass
     
 
@@ -102,7 +107,7 @@ class Train(GameObject):
     def draw(self):
         pygame.draw.rect(self.surface, self.color, self.sprite)
         
-    def tick(self):
+    def tick(self, controller):
         if self.wait_time >= 0:
             self.color = RED
             self.wait_time -= 1
@@ -134,4 +139,4 @@ class Train(GameObject):
                     self.destination = self.track.breakpoints[self.break_point_index]
             else: # if at end station
                 self.break_point_index = 0
-                self.track.end_station.receive(self)
+                self.track.end_station.receive(self, controller)

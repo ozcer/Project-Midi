@@ -43,11 +43,11 @@ ctrl.entities.append(track5)
 station1.addTrack(track5, "short")
 
 train1 = Train(station1, "route1", MAINSURF)
-station1.receive(train1)
+station1.receive(train1, ctrl)
 ctrl.entities.append(train1)
 
 train2 = Train(station3, "short", MAINSURF)
-station3.receive(train2)
+station3.receive(train2, ctrl)
 
 ctrl.entities.append(train2)
 
