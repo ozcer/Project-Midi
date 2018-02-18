@@ -10,12 +10,19 @@ class Controller():
     entities = []
     
     fpsClock = pygame.time.Clock()
+
+
     
     def __init__(self, surf):
         self.surface = surf
         self.currentMoney = 0
+        self.deductRate = 5000
+        self.timeUntilDeduct = 0
+        self.deductPeriod = 180
+
 
     def tick(self):
+        self.handleExpense()
         for entity in Controller.entities:
             entity.tick(self)
             entity.draw()
@@ -44,3 +51,12 @@ class Controller():
 
     def addMoney(self, delta):
         self.currentMoney += delta
+
+    def handleExpense(self):
+    	if self.timeUntilDeduct is 0:
+    		self.currentMoney -= self.deductRate
+    		self.timeUntilDeduct = self.deductPeriod
+    	else:
+    		self.timeUntilDeduct-= 1
+
+
