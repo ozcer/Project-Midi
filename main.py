@@ -15,7 +15,7 @@ bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
 pygame.display.set_caption('SkyTrain Sim')
 
-ctrl = controller.Controller(bg)
+ctrl = controller.Controller(MAINSURF)
 station1 = Station((50, 50), MAINSURF)
 ctrl.entities.append(station1)
 
