@@ -12,7 +12,9 @@ def draw_start_screen(surface, windowWidth, windowHeight):
     while inStartScreen:
 
         surface.blit(startImage, startRect)
-        message_to_screen(surface, "Press space to continue", const.BLACK)
+        font = pygame.font.Font("fonty.ttf", 45)
+        font = font.render("PRESS 1 OR 2 TO BEGIN", True, const.RED)
+        surface.blit(font, (50,50))
         pygame.display.update()
 
         keys = pygame.key.get_pressed()
@@ -26,7 +28,9 @@ def draw_start_screen(surface, windowWidth, windowHeight):
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_1:
+                    inStartScreen = False
+                if event.key == pygame.K_2:
                     inStartScreen = False
 
 
