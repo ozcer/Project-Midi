@@ -128,6 +128,10 @@ def create_track(start, end, breakpoints, surface=MAINSURF):
     ctrl.entities.append(new_track)
     start.addTrack(new_track)
 
+    new_track2 = Track(end, start, [], surface)
+    ctrl.entities.append(new_track2)
+    end.addTrack(new_track2)
+
 
 def clear_selected_stations(select_list):
     for station in select_list:
