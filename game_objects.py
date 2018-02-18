@@ -66,7 +66,11 @@ class Train(GameObject):
         self.destination = (0,0)
         self.wait_time = 0
         self.route = route
-        self.speed = 3
+        
+        self.max_speed = 5
+        self.min_speed = 1
+        self.speed = 5
+        
         self.route = route
         self.x, self.y = parked_station.x, parked_station.y
         self.dimensions = (30, 10)
@@ -100,15 +104,20 @@ class Train(GameObject):
         
     def tick(self):
         if self.wait_time >= 0:
+            self.color = RED
             self.wait_time -= 1
             self.speed = 0
-            self.color = RED
-        elif self.at((self.track.end_station.x, self.track.end_station.y), 75) or self.at((self.track.start_station.x, self.track.start_station.y), 75):
-            self.speed = 2
+        # if approaching station, slow down
+        elif self.at((self.track.end_station.x, self.track.end_station.y), 75):
             self.color = YELLOW
+            self.speed = self.speed - 0.2 if self.speed > self.min_speed else self.min_speed
+        # if leaving station, speed up
+        elif self.at((self.track.start_station.x, self.track.start_station.y), 75):
+            self.color = YELLOW
+            self.speed = self.speed + 0.2 if self.speed < self.max_speed else self.max_speed
         else:
-            self.speed = 4
             self.color = GREEN
+            self.speed = 4
         self.angle = self.get_angle(self.destination)
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)
