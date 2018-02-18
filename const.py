@@ -11,6 +11,7 @@ ORANGE = (255, 165, 0)
 GRAY = (153, 153, 153)
 VIOLET = (138, 43, 226)
 PINK = (255, 192, 203)
+BEIGE = (245, 245, 220)
 
 #UI
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)

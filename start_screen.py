@@ -7,10 +7,10 @@ from const import *
 # pass path as parameter
 def draw_start_screen(surface):
     startImage = pygame.image.load("mountain.png")
-    startRect = startImage.get_rect(center=(DISPLAY_CENTER_X, DISPLAY_CENTER_Y))
+    startRect = startImage.get_rect(center=(DISPLAY_CENTER_X + 300, DISPLAY_CENTER_Y))
     while True:
 
-        surface.fill(WHITE)
+        surface.fill(BEIGE)
         surface.blit(startImage, startRect)
 
         font = pygame.font.Font("fonty.ttf", 45)
