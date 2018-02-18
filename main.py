@@ -23,20 +23,20 @@ bg = pygame.image.load(map_choice+".png").convert()
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 if map_choice == "tokyo":
     ctrl = controller.Controller(MAINSURF)
-    station1 = Station((50, 50), MAINSURF)
+    station1 = Station((198, 162), MAINSURF, "Ichigo Kuruwa")
     ctrl.entities.append(station1)
 
-    station2 = Station((1200, 250), MAINSURF)
+    station2 = Station((882, 105), MAINSURF, "Restricted Nuclear Site 3")
     ctrl.entities.append(station2)
 
-    station3 = Station((50, 400), MAINSURF)
+    station3 = Station((161, 410), MAINSURF, "Pippon no Pippopo Shopping District")
     ctrl.entities.append(station3)
 
-    track1 = Track(station1, station2, [(1000, 50)], MAINSURF)
+    track1 = Track(station1, station2, [(400, 150)], MAINSURF)
     ctrl.entities.append(track1)
     station1.addTrack(track1, "route1")
 
-    track2 = Track(station2, station3, [(500, 200)], MAINSURF)
+    track2 = Track(station2, station3, [(500, 500)], MAINSURF)
     ctrl.entities.append(track2)
     station2.addTrack(track2, "route1")
 
@@ -63,13 +63,13 @@ if map_choice == "tokyo":
 if map_choice == "london":
     ctrl = controller.Controller(MAINSURF)
 
-    station1 = Station((382, 363), MAINSURF)
+    station1 = Station((382, 363), MAINSURF, "Werchestorston")
     ctrl.entities.append(station1)
 
-    station2 = Station((783, 155), MAINSURF)
+    station2 = Station((783, 155), MAINSURF, "Chickmon-upon-Stain")
     ctrl.entities.append(station2)
 
-    station3 = Station((1040, 572), MAINSURF)
+    station3 = Station((1040, 572), MAINSURF, "Piddlty Wellington III")
     ctrl.entities.append(station3)
 
     track1 = Track(station1, station2, [(420, 211)], MAINSURF)

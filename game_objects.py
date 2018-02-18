@@ -33,13 +33,14 @@ class Track(GameObject):
 
 class Station(GameObject):
     
-    def __init__(self, pos: (int, int), surface):
+    def __init__(self, pos: (int, int), surface, name):
         self.tracks = {} # "routeName": Track
         self.x = pos[0]
         self.y = pos[1]
         self.dimensions = (20,20)
         self.sprite = pygame.Rect(self.x, self.y, *self.dimensions)
         self.surface = surface
+        self.name = name
 
         #passenger info
         self.populate_rate = POP_RATE
