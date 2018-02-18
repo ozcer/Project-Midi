@@ -66,21 +66,21 @@ if map_choice == "london":
     station1 = Station((382, 363), MAINSURF)
     ctrl.entities.append(station1)
 
-    station2 = Station((312, 125), MAINSURF)
+    station2 = Station((783, 155), MAINSURF)
     ctrl.entities.append(station2)
 
-    station3 = Station((50, 400), MAINSURF)
+    station3 = Station((1040, 572), MAINSURF)
     ctrl.entities.append(station3)
 
-    track1 = Track(station1, station2, [(350, 250)], MAINSURF)
+    track1 = Track(station1, station2, [(420, 211)], MAINSURF)
     ctrl.entities.append(track1)
     station1.addTrack(track1, "route1")
 
-    track2 = Track(station2, station3, [(91, 280)], MAINSURF)
+    track2 = Track(station2, station3, [(911, 402)], MAINSURF)
     ctrl.entities.append(track2)
     station2.addTrack(track2, "route1")
 
-    track3 = Track(station3, station1, [], MAINSURF)
+    track3 = Track(station3, station1, [(660,623)], MAINSURF)
     ctrl.entities.append(track3)
     station3.addTrack(track3, "route1")
     station3.addTrack(track3, "short")
