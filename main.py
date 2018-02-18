@@ -32,7 +32,7 @@ if map_choice == "tokyo":
     station3 = Station((161, 410), MAINSURF, "Pippon no Pippopo Shopping District")
     ctrl.entities.append(station3)
 
-    track1 = Track(station1, station2, [(400, 150)], MAINSURF)
+    track1 = Track(station1, station2, [(550, 250)], MAINSURF)
     ctrl.entities.append(track1)
     station1.addTrack(track1, "full")
 
