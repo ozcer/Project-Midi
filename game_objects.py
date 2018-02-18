@@ -102,7 +102,7 @@ class Train(GameObject):
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)
         # if reaches the destination
-        if dist(self.destination, (self.x, self.y)) <= 3:
+        if self.at(self.destination):
             self.break_point_index += 1
             # if is not at end station
             if not self.at((self.track.end_station.x, self.track.end_station.y)):
