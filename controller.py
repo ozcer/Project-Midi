@@ -16,7 +16,7 @@ class Controller():
     
     def __init__(self, surf):
         self.surface = surf
-        self.currentMoney = 500
+        self.currentMoney = 1200
         self.deductRate = 1000
         self.timeUntilDeduct = 1000
         self.deductPeriod = 1800
