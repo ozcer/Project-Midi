@@ -12,9 +12,10 @@ DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
 bg = pygame.image.load("tokyo.png")
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
+
 pygame.display.set_caption('SkyTrain Sim')
 
-ctrl = controller.Controller(MAINSURF)
+ctrl = controller.Controller(bg)
 station1 = Station((50, 50), MAINSURF)
 ctrl.entities.append(station1)
 

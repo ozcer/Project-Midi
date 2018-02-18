@@ -15,4 +15,4 @@ PINK = (255, 192, 203)
 #UI
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
-FPS = 30
+FPS = 60
