@@ -88,8 +88,8 @@ class Train(GameObject):
     def project(self):
         # if (hypot(self.destination[0] - self.x, self.destination[1] - self.y) <= 3):
         #     return self.x, self.y
-        return (round(self.x + (cos(self.angle) * self.speed)),
-                round(self.y - (sin(self.angle) * self.speed)))
+        return (round(self.x + (cos(self.angle) * self.speed), 2),
+                round(self.y - (sin(self.angle) * self.speed), 2))
     
     def at(self, destination, within=3):
         return dist(destination, (self.x, self.y)) <= within
