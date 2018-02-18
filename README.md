@@ -1,17 +1,10 @@
-# Project-Midi
-strongest hackathon project
+# Mountain Madness Hackathon 2018
 
-# General Info
-* SFU Burnaby TASC 9204 - Checkin
-* Feb 17 10:00am - Feb 18 1:15pm
+Gondaola Tycoon 2018
 
-An overnight Hackathon project developed by:
-# Members:
-- [x] Oscar
-- [x] Anas
-- [x] Tony
-- [x] Allan
+# Requirement
 
-Required dependencies: Pygame, Python 3.x.x
-Modify the constant file to change income rate, costs of objects and general balancing of the game.
-Run the main.py file to initialize the game.
+* Python3
+* Pygame
+
+clone and run `python3 main.py`

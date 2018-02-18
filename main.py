@@ -13,7 +13,7 @@ pygame.mixer.set_num_channels(64)
 pygame.mixer.music.load("ambient.mp3")
 pygame.mixer.music.play()
 
-pygame.display.set_caption('TRAIN SIMULATOR')
+pygame.display.set_caption('Gondola Tycoon 2018')
 
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
@@ -137,9 +137,14 @@ def create_track(start, end, breakpoints, surface=MAINSURF):
     end.addTrack(new_track2)
 
 def create_train(station, controller, surface=MAINSURF):
-    new_train = Train(station, MAINSURF)
-    station.receive(new_train, controller)
-    controller.entities.append(new_train)
+    if len(station.tracks) != 0:
+        new_train = Train(station, MAINSURF)
+        station.receive(new_train, controller)
+        controller.entities.append(new_train)
+    else:
+        tooltip["msg"] = "Mountain not connected!"
+        tooltip["pos"] = (station.x, station.y - 15)
+        tooltip["time"] = 50
 
 def clear_selected_stations(select_list):
     for station in select_list:
