@@ -40,8 +40,11 @@ class Station(GameObject):
         self.dimensions = (20,20)
         self.sprite = pygame.Rect(self.x, self.y, *self.dimensions)
         self.surface = surface
-        self.populateRate = 0.01
-        self.populateCounter = 0
+
+        #passenger info
+        self.populate_rate = 1
+        self.pop_countdown = 100
+        self.pop = 0
         
         self.color = BLUE
         self.font = pygame.font.SysFont(None, 20)
@@ -53,9 +56,8 @@ class Station(GameObject):
         train.travel_track(track)
     
     def receive(self, train, controller):
-        [i, d] = divmod(self.populateCounter, 1)
-        controller.addMoney(i)
-        self.populateCounter -= i
+        controller.addMoney(self.pop)
+        self.pop = 0
         print(controller.currentMoney)
         train.wait_time = FPS
         target_track = self.tracks[train.route]
@@ -68,14 +70,16 @@ class Station(GameObject):
         self.surface.blit(text_surf, (self.x, self.y + 10))
 
         #draws population of each station
-        [i, d] = divmod(self.populateCounter, 1)
-        text_surf = self.font.render(f"pop: {int(i)}", True, BLACK)
+        text_surf = self.font.render("Pop: " + str(self.pop), True, BLACK)
         self.surface.blit(text_surf, (self.x, self.y + 25))
 
     
     def tick(self, controller):
-        self.populateCounter += self.populateRate
-    
+        self.pop_countdown -= self.populate_rate
+        if self.pop_countdown == 0:
+            self.pop += 1
+            self.pop_countdown = 100
+
 
 class Train(GameObject):
     
@@ -98,6 +102,9 @@ class Train(GameObject):
         self.color = GREEN
 
         self.font = pygame.font.SysFont(None, 20)
+
+        #passenger info
+        self.current_passenger = 0
 
     def travel_track(self, track):
         self.break_point_index = 0
