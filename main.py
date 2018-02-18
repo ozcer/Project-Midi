@@ -9,7 +9,7 @@ pygame.init()
 
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
-bg = pygame.image.load("vancouver.jpg")
+bg = pygame.image.load("transit_map.png")
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
 pygame.display.set_caption('SkyTrain Sim')
