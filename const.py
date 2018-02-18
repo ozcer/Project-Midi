@@ -20,6 +20,8 @@ FPS = 60
 POP_RATE = 2
 TRAIN_CAPACITY = 20
 INCOME_RATE = 25
+TRAIN_COST = 400
+
 
 #Pictures
 HAPPY = pygame.image.load("happy.png")

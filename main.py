@@ -120,7 +120,7 @@ def create_station(pos, surface, ctrl):
     if ctrl.get_money() >= 300:
         random_name = "Mount " + random.choice(nouns).capitalize()
         new_station = Station(pos, surface, random_name)
-        ctrl.entities.append(new_station)
+        ctrl.entities.insert(0, new_station)
         ctrl.addMoney(-300)
     else:
         tooltip["msg"] = "NOT ENOUGH MONEY!"
@@ -138,6 +138,10 @@ def create_track(start, end, breakpoints, surface=MAINSURF):
     ctrl.entities.append(new_track2)
     end.addTrack(new_track2)
 
+def create_train(station, controller, surface=MAINSURF):
+    new_train = Train(station, MAINSURF)
+    station.receive(new_train, controller)
+    controller.entities.append(new_train)
 
 def clear_selected_stations(select_list):
     for station in select_list:
@@ -157,6 +161,12 @@ while True:  # main game loop
     if keys[K_ESCAPE]:
         pygame.quit()
         sys.exit()
+        
+    if keys[K_b]:
+        if ctrl.currentMoney >= TRAIN_COST and len(selected_stations)==1:
+            ctrl.addMoney(-TRAIN_COST)
+            create_train(selected_stations[0], ctrl)
+            clear_selected_stations(selected_stations)
 
     for event in pygame.event.get():
         if event.type == pygame.locals.QUIT:
@@ -186,8 +196,6 @@ while True:  # main game loop
                     if len(selected_stations) == 2:
                         create_track(selected_stations[0], selected_stations[1], [])
                         clear_selected_stations(selected_stations)
-                    elif clicked_on_station.getName() == "New Station":
-                        pass
             elif event.button == 2:
                 print(selected_stations)
             elif event.button == 3:
