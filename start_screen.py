@@ -5,16 +5,20 @@ from pygame.locals import *
 
 # pass path as parameter
 def draw_start_screen(surface, windowWidth, windowHeight):
-    startImage = pygame.image.load("train.jpg")
-    startImage = pygame.transform.scale(startImage, (windowWidth, windowHeight))
-    startRect = startImage.get_rect()
+    startImage = pygame.image.load("train.png")
+    #startImage = pygame.transform.scale(startImage, (windowWidth, windowHeight))
+    startRect = startImage.get_rect(center=(const.DISPLAY_CENTER_X, const.DISPLAY_CENTER_Y))
     inStartScreen = True
     while inStartScreen:
 
         surface.blit(startImage, startRect)
+
         font = pygame.font.Font("fonty.ttf", 45)
-        font = font.render("PRESS 1 OR 2 TO BEGIN", True, const.RED)
-        surface.blit(font, (50,50))
+        small_font = pygame.font.Font("fonty.ttf", 25)
+        title_text = font.render("Train Simulator:", True, const.RED)
+        options_text = small_font.render("PRESS 1 FOR TOKYO, PRESS 2 FOR VANCOUVER", True, const.RED)
+        surface.blit(title_text, (50,50))
+        surface.blit(options_text, (150, 150))
         pygame.display.update()
 
         keys = pygame.key.get_pressed()
