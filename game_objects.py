@@ -1,7 +1,6 @@
 import pygame
 from math import sin, cos, pi, atan2, hypot
 from const import *
-import economy
 
 
 def dist(destination, origin):

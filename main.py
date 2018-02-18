@@ -7,7 +7,8 @@ from pygame.locals import *
 
 pygame.init()
 
-MAINSURF = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
+MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
 bg = pygame.image.load("vancouver.jpg")
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
@@ -61,11 +62,16 @@ while True:  # main game loop
     ctrl.tick()
 
     keys = pygame.key.get_pressed()
-        
+
+    if keys[K_ESCAPE]:
+        pygame.quit()
+        sys.exit()
+
     for event in pygame.event.get():
         if event.type == pygame.locals.QUIT:
             pygame.quit()
             sys.exit()
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             print(pygame.mouse.get_pos())
             mousePos = pygame.mouse.get_pos()

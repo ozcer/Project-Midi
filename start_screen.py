@@ -1,6 +1,7 @@
 import pygame
 import const
-
+import sys
+from pygame.locals import *
 
 # pass path as parameter
 def draw_start_screen(surface, windowWidth, windowHeight):
@@ -13,6 +14,12 @@ def draw_start_screen(surface, windowWidth, windowHeight):
         surface.blit(startImage, startRect)
         message_to_screen(surface, "Press space to continue", const.BLACK)
         pygame.display.update()
+
+        keys = pygame.key.get_pressed()
+
+        if keys[K_ESCAPE]:
+            pygame.quit()
+            sys.exit()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
