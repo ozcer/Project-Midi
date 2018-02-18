@@ -42,6 +42,7 @@ class Station(GameObject):
         self.surface = surface
         
         self.color = BLUE
+        self.font = pygame.font.SysFont(None, 20)
         
     def addTrack(self, track, route):
         self.tracks[route] = track
@@ -52,15 +53,15 @@ class Station(GameObject):
     def receive(self, train, controller):
         controller.addMoney()
         print(controller.currentMoney)
-        train.wait_time = FPS/2
+        train.wait_time = FPS
         target_track = self.tracks[train.route]
         self.send(train, target_track)
 
-
-    
     def draw(self):
         self.sprite.center = (self.x, self.y)
         pygame.draw.rect(self.surface, self.color , self.sprite)
+        text_surf = self.font.render("pos: " + str(self.x)+", "+str(self.y), True, (BLACK))
+        self.surface.blit(text_surf, (self.x, self.y + 10))
 
     
     def tick(self, controller):
@@ -74,8 +75,8 @@ class Train(GameObject):
         self.wait_time = 0
         self.route = route
         
-        self.max_speed = 4
-        self.min_speed = 1
+        self.max_speed = 3
+        self.min_speed = .5
         self.speed = 0
         self.accel = .1
         
