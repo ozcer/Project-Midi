@@ -140,8 +140,10 @@ class Train(pygame.sprite.Sprite):
         pygame.draw.line(self.surface, self.color,
                          (self.x, self.y), self.get_head_pos(), self.dimensions[1])
         #pygame.draw.rect(self.surface, self.color, self.sprite)
-        text_surf = self.font.render("speed: " + str(self.speed), True, (BLACK))
-        self.surface.blit(text_surf, (self.x, self.y+10))
+        text_surf = self.font.render(f"route: {self.route}", True, (BLACK))
+        self.surface.blit(text_surf, (self.x, self.y + 10))
+        text_surf = self.font.render(f"speed: {self.speed}", True, (BLACK))
+        self.surface.blit(text_surf, (self.x, self.y + 25))
         
     def tick(self, controller):
         if self.wait_time >= 0:

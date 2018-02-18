@@ -34,29 +34,33 @@ ctrl.entities.append(station3)
 
 track1 = Track(station1, station2, [(1000, 50)], MAINSURF)
 ctrl.entities.append(track1)
-station1.addTrack(track1, "route1")
+station1.addTrack(track1, "full")
 
 track2 = Track(station2, station3, [(500, 200)], MAINSURF)
 ctrl.entities.append(track2)
-station2.addTrack(track2, "route1")
+station2.addTrack(track2, "full")
 
 track3 = Track(station3, station1, [], MAINSURF)
 ctrl.entities.append(track3)
-station3.addTrack(track3, "route1")
-station3.addTrack(track3, "short")
+station3.addTrack(track3, "full")
+station3.addTrack(track3, "express")
 
 track5 = Track(station1, station3, [], MAINSURF)
 ctrl.entities.append(track5)
-station1.addTrack(track5, "short")
+station1.addTrack(track5, "express")
 
-train1 = Train(station1, "route1", MAINSURF)
+train1 = Train(station1, "full", MAINSURF)
 station1.receive(train1, ctrl)
 ctrl.entities.append(train1)
 
-train2 = Train(station3, "short", MAINSURF)
+train2 = Train(station3, "express", MAINSURF)
 station3.receive(train2, ctrl)
-
 ctrl.entities.append(train2)
+
+train3 = Train(station3, "full", MAINSURF)
+station3.receive(train3, ctrl)
+ctrl.entities.append(train3)
+
 
 selected_stations = []
 
