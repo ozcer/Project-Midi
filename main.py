@@ -9,7 +9,7 @@ pygame.init()
 pygame.mixer.init()
 pygame.mixer.set_num_channels(64)
 pygame.mixer.music.load("zelda.mp3")
-pygame.mixer.music.play()
+pygame.mixer.music.play(-1)
 choo_sound = pygame.mixer.Sound("choo.wav")
 
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
