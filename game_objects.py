@@ -77,9 +77,9 @@ class Station(GameObject):
         self.surface.blit(text_surf, (self.x, self.y + 25))
 
         #draw station names
-        self.font = pygame.font.SysFont(None, 30)
-        self.font.set_underline(True)
-        text_surf = self.font.render(self.name, True, BLACK)
+        stationfont = pygame.font.SysFont(None, 30)
+        stationfont.set_underline(True)
+        text_surf = stationfont.render(self.name, True, BLACK)
         self.surface.blit(text_surf, (self.x - 60, self.y - 40))
 
     
