@@ -2,6 +2,9 @@ import pygame
 from game_objects import *
 from const import *
 
+from pygame.locals import *
+
+
 class Controller():
     entities = []
     
@@ -20,8 +23,9 @@ class Controller():
         money_font = pygame.font.SysFont(None, 25)
         text_surf =  money_font.render("Money: $" + str(self.currentMoney), True, (BLACK))
         self.surface.blit(text_surf, (25, DISPLAY_HEIGHT-25))
-
-        text_surf = money_font.render("FPS: " + str(Controller.fpsClock.get_fps()), True, (BLACK))
+        
+        rounded_fps = round(Controller.fpsClock.get_fps())
+        text_surf = money_font.render("FPS: " + str(rounded_fps), True, (BLACK))
         self.surface.blit(text_surf, (10, 10))
 
         pygame.display.update()

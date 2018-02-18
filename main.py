@@ -6,10 +6,10 @@ from game_objects import *
 from pygame.locals import *
 
 pygame.init()
-
-MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+flags = FULLSCREEN | DOUBLEBUF
+MAINSURF = pygame.display.set_mode((0,0),flags)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
-bg = pygame.image.load("tokyo.png")
+bg = pygame.image.load("tokyo.png").convert()
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
 
@@ -72,10 +72,9 @@ def clear_selected_stations(select_list):
     del select_list[:]
 
 while True:  # main game loop
-
-
-    MAINSURF.blit(bg,(0, 0))
     
+    #MAINSURF.fill(WHITE)
+    MAINSURF.blit(bg,(0, 0))
     ctrl.tick()
 
     keys = pygame.key.get_pressed()

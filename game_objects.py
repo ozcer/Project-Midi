@@ -52,7 +52,8 @@ class Station(GameObject):
     
     def receive(self, train, controller):
         controller.addMoney()
-        train.wait_time = FPS
+        print(controller.currentMoney)
+        train.wait_time = FPS/2
         target_track = self.tracks[train.route]
         self.send(train, target_track)
 
