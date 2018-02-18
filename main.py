@@ -1,23 +1,18 @@
 import sys
 import controller
-import const
+from const import *
 import start_screen
 from game_objects import *
 import pygame.locals
 
 pygame.init()
 
-WIDTH = 1250
-HEIGHT = 500
-MAINSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+
+MAINSURF = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
 pygame.display.set_caption('Hello World!')
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+
 gamestate = "START"
 
 ctrl = controller.Controller()
@@ -47,7 +42,7 @@ station1.receive(train1)
 ctrl.entities.append(train1)
 
 
-start_screen.draw_start_screen(MAINSURF, const.DISPLAY_WIDTH, const.DISPLAY_HEIGHT)
+start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
 while True:  # main game loop
 
 
