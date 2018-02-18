@@ -25,6 +25,7 @@ class Controller():
     def tick(self):
         self.handleExpense()
         for entity in Controller.entities:
+            print(entity)
             entity.tick(self)
             entity.draw()
 
@@ -55,9 +56,10 @@ class Controller():
         clock_surf = money_font.render(str(clock_ui)+" seconds", True, (BLACK))
         self.surface.blit(clock_surf, (DISPLAY_WIDTH - 300, 10))
 
-        #randomized cloud movement
-        if randint(0,9) < 3:
-            print("success")
+        #randomized cloud generation
+        if randint(0, 200) == 0:
+            cloud1 = Cloud(self.surface)
+            Controller.entities.append(cloud1)
 
 
         pygame.display.update()

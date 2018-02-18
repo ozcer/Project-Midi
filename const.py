@@ -28,3 +28,5 @@ ANGRY = pygame.image.load("sad.png")
 HAPPYIMG = pygame.transform.scale(HAPPY, (25, 25))
 NEUTRALIMG = pygame.transform.scale(NEUTRAL, (25, 25))
 ANGRYIMG = pygame.transform.scale(ANGRY, (25, 25))
+
+CLOUD = pygame.image.load("cloud.png")
