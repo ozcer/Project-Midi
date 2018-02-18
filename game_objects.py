@@ -242,15 +242,14 @@ class Cloud():
         self.img = pygame.transform.scale(CLOUD, (randint(150,200), randint(50,100)))
         self.rect = self.img.get_rect()
 
-    def __del__(self):
-        print("Cloud deleted")
 
     def draw(self):
-        self.surface.blit(self.img, self.rect)
+        if(self.x >= DISPLAY_WIDTH):
+            pass
+        else:
+            self.surface.blit(self.img, self.rect)
 
     def tick(self, controller):
         self.rect.center = (self.x, self.y)
         self.x += self.velocity
-        if self.x >= DISPLAY_WIDTH:
-            print("end")
-            #__del__
+
