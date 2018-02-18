@@ -41,7 +41,7 @@ class Station(GameObject):
         self.tracks = {} # "routeName": Track
         self.x = pos[0]
         self.y = pos[1]
-        self.stationDimensions = 20
+        self.stationSize = 20
         self.surface = surface
     
     def addTrack(self, track, route):
