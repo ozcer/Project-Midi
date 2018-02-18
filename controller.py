@@ -18,7 +18,3 @@ class Controller():
         
         pygame.display.update()
         Controller.fpsClock.tick(FPS)
-    
-    def save_map(self):
-        print("xD")
-        

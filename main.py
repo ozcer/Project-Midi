@@ -7,8 +7,6 @@ from pygame.locals import *
 
 pygame.init()
 
-editorMode = True
-
 MAINSURF = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
 pygame.display.set_caption('Hello World!')
@@ -19,17 +17,17 @@ ctrl = controller.Controller()
 station1 = Station((50, 50), MAINSURF)
 ctrl.entities.append(station1)
 
-station2 = Station((600, 250), MAINSURF)
+station2 = Station((1200, 250), MAINSURF)
 ctrl.entities.append(station2)
 
-station3 = Station((50, 250), MAINSURF)
+station3 = Station((50, 400), MAINSURF)
 ctrl.entities.append(station3)
 
-track1 = Track(station1, station2, [(700, 50)], MAINSURF)
+track1 = Track(station1, station2, [(1000, 50)], MAINSURF)
 ctrl.entities.append(track1)
 station1.addTrack(track1, "route1")
 
-track2 = Track(station2, station3, [(100, 150)], MAINSURF)
+track2 = Track(station2, station3, [(500, 200)], MAINSURF)
 ctrl.entities.append(track2)
 station2.addTrack(track2, "route1")
 
@@ -61,20 +59,14 @@ while True:  # main game loop
     ctrl.tick()
 
     keys = pygame.key.get_pressed()
-    if keys[K_s]:
-        ctrl.save_map()
         
     for event in pygame.event.get():
         if event.type == pygame.locals.QUIT:
             pygame.quit()
             sys.exit()
-        if editorMode == True:
-        	if event.type == pygame.MOUSEBUTTONDOWN:
-        		print(pygame.mouse.get_pos())
-        		mousePos = pygame.mouse.get_pos()
-
-        		newStation = Station(mousePos, MAINSURF)
-        		ctrl.entities.append(newStation)
-
-
-
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print(pygame.mouse.get_pos())
+            mousePos = pygame.mouse.get_pos()
+    
+            newStation = Station(mousePos, MAINSURF)
+            ctrl.entities.append(newStation)
