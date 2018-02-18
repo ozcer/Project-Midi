@@ -8,6 +8,8 @@ from pygame.locals import *
 pygame.init()
 
 MAINSURF = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
+bg = pygame.image.load("vancouver.jpg")
+bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
 pygame.display.set_caption('Hello World!')
 
@@ -54,7 +56,7 @@ start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
 while True:  # main game loop
 
 
-    MAINSURF.fill(WHITE)
+    MAINSURF.blit(bg,(0, 0))
     
     ctrl.tick()
 
