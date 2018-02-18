@@ -48,6 +48,7 @@ class Station(GameObject):
         train.travel_track(track)
     
     def receive(self, train):
+        train.wait_time = FPS
         target_track = self.tracks[train.route]
         self.send(train, target_track)
     
@@ -63,7 +64,7 @@ class Train(GameObject):
     
     def __init__(self, parked_station, route, surface):
         self.destination = (0,0)
-        
+        self.wait_time = 0
         self.route = route
         self.speed = 3
         self.route = route
@@ -98,6 +99,13 @@ class Train(GameObject):
         pygame.draw.rect(self.surface, self.color, self.sprite)
         
     def tick(self):
+        if self.wait_time >= 0:
+            self.wait_time -= 1
+            self.speed = 0
+            self.color = RED
+        else:
+            self.speed = 4
+            self.color = GREEN
         self.angle = self.get_angle(self.destination)
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)

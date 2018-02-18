@@ -1,10 +1,10 @@
 import pygame
-
+from game_objects import *
+from const import *
 
 class Controller():
     entities = []
     
-    FPS = 60
     fpsClock = pygame.time.Clock()
     
     def __init__(self):
@@ -17,4 +17,8 @@ class Controller():
             entity.draw()
         
         pygame.display.update()
-        Controller.fpsClock.tick(Controller.FPS)
+        Controller.fpsClock.tick(FPS)
+    
+    def save_map(self):
+        print("xD")
+        

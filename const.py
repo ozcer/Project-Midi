@@ -1,4 +1,3 @@
-import pygame
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -10,3 +9,5 @@ YELLOW = (255, 255, 0)
 #UI
 DISPLAY_WIDTH = 1250
 DISPLAY_HEIGHT = 500
+
+FPS = 60

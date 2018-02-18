@@ -3,7 +3,7 @@ import controller
 from const import *
 import start_screen
 from game_objects import *
-import pygame.locals
+from pygame.locals import *
 
 pygame.init()
 
@@ -36,10 +36,8 @@ station2.addTrack(track2, "route1")
 track3 = Track(station3, station1, [], MAINSURF)
 ctrl.entities.append(track3)
 station3.addTrack(track3, "route1")
+station3.addTrack(track3, "short")
 
-track4 = Track(station3, station1, [], MAINSURF)
-ctrl.entities.append(track4)
-station3.addTrack(track4, "short")
 track5 = Track(station1, station3, [], MAINSURF)
 ctrl.entities.append(track5)
 station1.addTrack(track5, "short")
@@ -53,16 +51,19 @@ station3.receive(train2)
 
 ctrl.entities.append(train2)
 
-
-
 start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
+
 while True:  # main game loop
 
 
     MAINSURF.fill(WHITE)
     
     ctrl.tick()
-    
+
+    keys = pygame.key.get_pressed()
+    if keys[K_s]:
+        ctrl.save_map()
+        
     for event in pygame.event.get():
         if event.type == pygame.locals.QUIT:
             pygame.quit()
