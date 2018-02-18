@@ -4,7 +4,9 @@ import const
 from pygame.locals import *
 from const import *
 
-def draw_end_screen(surface, ):
+
+
+def draw_end_screen(surface):
     endImage = pygame.image.load("death.png")
     endRect = endImage.get_rect(center=(DISPLAY_CENTER_X, DISPLAY_CENTER_Y))
     while True:
