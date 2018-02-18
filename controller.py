@@ -10,7 +10,7 @@ class Controller():
     def __init__(self, surf):
         self.surface = surf
         self.currentMoney = 0
-        self.incomeRate = 1
+        self.incomeRate = 100
 
     def tick(self):
         for entity in Controller.entities:
@@ -18,8 +18,11 @@ class Controller():
             entity.draw()
 
         money_font = pygame.font.SysFont(None, 25)
-        text_surf =  money_font.render("Money: " + str(self.currentMoney), True, (BLACK))
-        self.surface.blit(text_surf, [0, DISPLAY_HEIGHT-25])
+        text_surf =  money_font.render("Money: $" + str(self.currentMoney), True, (BLACK))
+        self.surface.blit(text_surf, (25, DISPLAY_HEIGHT-25))
+
+        text_surf = money_font.render("FPS: " + str(Controller.fpsClock.get_fps()), True, (BLACK))
+        self.surface.blit(text_surf, (10, 10))
 
         pygame.display.update()
         Controller.fpsClock.tick(FPS)

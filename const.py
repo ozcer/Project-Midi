@@ -1,3 +1,4 @@
+import pygame
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -12,6 +13,6 @@ VIOLET = (138, 43, 226)
 PINK = (255, 192, 203)
 
 #UI
-DISPLAY_WIDTH = 1250
-DISPLAY_HEIGHT = 500
-FPS = 60
+MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
+FPS = 30
