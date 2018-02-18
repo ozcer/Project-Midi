@@ -38,9 +38,12 @@ class Station(GameObject):
         self.tracks = {} # "routeName": Track
         self.x = pos[0]
         self.y = pos[1]
-        self.stationSize = 20
+        self.dimensions = (20,20)
+        self.sprite = pygame.Rect(self.x, self.y, *self.dimensions)
         self.surface = surface
-    
+        
+        self.color = BLUE
+        
     def addTrack(self, track, route):
         self.tracks[route] = track
     
@@ -57,7 +60,8 @@ class Station(GameObject):
 
     
     def draw(self):
-        pygame.draw.rect(self.surface, (0, 0, 255), [self.x - (self.stationSize/2), self.y-(self.stationSize/2), self.stationSize, self.stationSize])
+        self.sprite.center = (self.x, self.y)
+        pygame.draw.rect(self.surface, self.color , self.sprite)
 
     
     def tick(self, controller):

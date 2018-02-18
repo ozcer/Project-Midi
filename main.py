@@ -12,9 +12,7 @@ DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
 bg = pygame.image.load("vancouver.jpg")
 bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
-pygame.display.set_caption('Hello World!')
-
-
+pygame.display.set_caption('SkyTrain Sim')
 
 ctrl = controller.Controller()
 station1 = Station((50, 50), MAINSURF)
@@ -54,6 +52,24 @@ ctrl.entities.append(train2)
 
 start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
 
+selected_stations = []
+
+
+def create_station(pos, surface):
+    new_station = Station(pos, surface)
+    ctrl.entities.append(new_station)
+
+
+def create_track(start, end, breakpoints, surface=MAINSURF):
+    new_track = Track(start, end, [], surface)
+    ctrl.entities.append(new_track)
+
+
+def clear_selected_stations(select_list):
+    for station in select_list:
+        station.color = BLUE
+    del select_list[:]
+
 while True:  # main game loop
 
 
@@ -71,10 +87,25 @@ while True:  # main game loop
         if event.type == pygame.locals.QUIT:
             pygame.quit()
             sys.exit()
-
+            
+        # left click
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print(pygame.mouse.get_pos())
-            mousePos = pygame.mouse.get_pos()
-    
-            newStation = Station(mousePos, MAINSURF)
-            ctrl.entities.append(newStation)
+            if event.button == 1:
+                mouse_pos = pygame.mouse.get_pos()
+                clicked_on_station = None
+                for entity in controller.Controller.entities:
+                    if type(entity) == Station and entity.sprite.collidepoint(mouse_pos):
+                        print("clicking on station: ", entity.sprite)
+                        clicked_on_station = entity
+                        selected_stations.append(clicked_on_station)
+                if not clicked_on_station:
+                    create_station(mouse_pos, MAINSURF)
+                else:
+                    clicked_on_station.color = YELLOW
+                    if len(selected_stations) == 2:
+                        create_track(selected_stations[0], selected_stations[1], [])
+                        clear_selected_stations(selected_stations)
+            elif event.button == 2:
+                print(selected_stations)
+            elif event.button == 3:
+                clear_selected_stations(selected_stations)
