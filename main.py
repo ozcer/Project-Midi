@@ -117,7 +117,7 @@ def clear_selected_stations(select_list):
         station.color = BLUE
     del select_list[:]
 
-tooltip = {"msg":"Welcome!", "pos":(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2), "time":200}
+tooltip = {"msg":"", "pos":(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2), "time":200}
 ttfont = pygame.font.SysFont(None, 20)
 def draw_tooltip():
     if tooltip["time"] > 0:

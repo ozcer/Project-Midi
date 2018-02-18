@@ -27,16 +27,16 @@ class Controller():
             entity.tick(self)
             entity.draw()
 
-        money_font = pygame.font.SysFont(None, 50)
+        money_font = pygame.font.SysFont(None, 80)
         pos_surf = money_font.render("$"+str(self.currentMoney), True, (GREEN))
         neg_surf = money_font.render("$"+str(self.currentMoney), True, (RED))
         if self.currentMoney >= 0:
-            self.surface.blit(pos_surf, (25, DISPLAY_HEIGHT-50))
+            self.surface.blit(pos_surf, (10, DISPLAY_HEIGHT-60))
         else:
-            self.surface.blit(neg_surf, (25, DISPLAY_HEIGHT-50))
+            self.surface.blit(neg_surf, (10, DISPLAY_HEIGHT-60))
         
         rounded_fps = round(Controller.fpsClock.get_fps())
-        text_surf = money_font.render("FPS: " + str(rounded_fps), True, (BLACK))
+        text_surf = money_font.render("Wind: " + str(rounded_fps)+"km/hr", True, (BLACK))
         self.surface.blit(text_surf, (10, 10))
 
         #Legend ui

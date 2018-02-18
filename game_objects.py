@@ -73,7 +73,8 @@ class Station(GameObject):
 
     def draw(self):
         self.sprite.center = (self.x, self.y)
-        pygame.draw.rect(self.surface, self.color , self.sprite)
+        pygame.draw.circle(self.surface, GRAY, (self.x, self.y), 28)
+        pygame.draw.circle(self.surface, WHITE, (self.x, self.y), 10)
         text_surf = self.font.render("({},{})".format(self.x, self.y), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 10))
 
