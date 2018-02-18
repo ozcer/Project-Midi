@@ -33,7 +33,7 @@ class Track(GameObject):
 
 class Station(GameObject):
     
-    def __init__(self, pos: (int, int), surface, name="New Station"):
+    def __init__(self, pos: (int, int), surface, name="New Gondola"):
         self.tracks = {} # "routeName": Track
         self.x = pos[0]
         self.y = pos[1]
