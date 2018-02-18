@@ -81,9 +81,14 @@ class Station(GameObject):
             self.pop_countdown = 100
 
 
-class Train(GameObject):
+class Train(pygame.sprite.Sprite):
     
     def __init__(self, parked_station, route, surface):
+        super().__init__()
+        
+        self.image = pygame.Surface((30, 10))
+        self.image.fill(GREEN)
+        
         self.destination = (0,0)
         self.wait_time = 0
         self.route = route
@@ -126,8 +131,15 @@ class Train(GameObject):
     def at(self, destination, within=3):
         return dist(destination, (self.x, self.y)) <= within
     
+    def get_head_pos(self):
+        x = self.x + self.dimensions[0]*sin(self.angle+pi/2)
+        y = self.y + self.dimensions[0]*cos(self.angle+pi/2)
+        return (x, y)
+
     def draw(self):
-        pygame.draw.rect(self.surface, self.color, self.sprite)
+        pygame.draw.line(self.surface, self.color,
+                         (self.x, self.y), self.get_head_pos(), self.dimensions[1])
+        #pygame.draw.rect(self.surface, self.color, self.sprite)
         text_surf = self.font.render("speed: " + str(self.speed), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y+10))
         
