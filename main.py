@@ -8,9 +8,8 @@ from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
 pygame.mixer.set_num_channels(64)
-pygame.mixer.music.load("zelda.mp3")
-#pygame.mixer.music.play()
-
+pygame.mixer.music.load("ambient.mp3")
+pygame.mixer.music.play()
 
 MAINSURF = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
