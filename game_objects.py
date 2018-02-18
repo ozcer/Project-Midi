@@ -43,7 +43,7 @@ class Station(GameObject):
 
         #passenger info
         self.populate_rate = 1
-        self.pop_countdown = 100
+        self.pop_countdown = 200
         self.pop = 0
         
         self.color = BLUE
@@ -56,9 +56,11 @@ class Station(GameObject):
         train.travel_track(track)
     
     def receive(self, train, controller):
-        controller.addMoney(self.pop)
-        self.pop = 0
-        print(controller.currentMoney)
+        cashout_pass = train.train_pop
+        train.train_pop = 0
+        self.pop = train.pickup(self.pop)
+        controller.addMoney(cashout_pass)
+        # print(controller.currentMoney)
         train.wait_time = FPS
         target_track = self.tracks[train.route]
         self.send(train, target_track)
@@ -78,7 +80,7 @@ class Station(GameObject):
         self.pop_countdown -= self.populate_rate
         if self.pop_countdown == 0:
             self.pop += 1
-            self.pop_countdown = 100
+            self.pop_countdown = 200
 
 
 class Train(pygame.sprite.Sprite):
@@ -109,7 +111,17 @@ class Train(pygame.sprite.Sprite):
         self.font = pygame.font.SysFont(None, 20)
 
         #passenger info
-        self.current_passenger = 0
+        self.max_capacity = 5
+        self.train_pop = 0
+
+    #sets the passenger count on each train object and returns leftover passengers if any
+    def pickup(self, passenger):
+        if passenger > self.max_capacity:
+            self.train_pop = self.max_capacity
+        else:
+            self.train_pop = passenger
+        return passenger-self.train_pop
+
 
     def travel_track(self, track):
         self.break_point_index = 0
@@ -144,6 +156,8 @@ class Train(pygame.sprite.Sprite):
         self.surface.blit(text_surf, (self.x, self.y + 10))
         text_surf = self.font.render(f"speed: {self.speed}", True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 25))
+        text_surf = self.font.render(f"current cap: {self.train_pop}", True, (BLACK))
+        self.surface.blit(text_surf, (self.x, self.y + 40))
         
     def tick(self, controller):
         if self.wait_time >= 0:
@@ -183,3 +197,4 @@ class Train(pygame.sprite.Sprite):
             else: # if at end station
                 self.break_point_index = 0
                 self.track.end_station.receive(self, controller)
+
