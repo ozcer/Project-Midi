@@ -19,17 +19,17 @@ DISPLAY_WIDTH, DISPLAY_HEIGHT = MAINSURF.get_size()
 #Our main menu function now returns our map choice, fyi
 map_choice = start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)
 
-bg = pygame.image.load(map_choice+".png").convert()
-bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 if map_choice == "tokyo":
+    bg = pygame.image.load("tokyo.png").convert()
+    bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
     ctrl = controller.Controller(MAINSURF)
-    station1 = Station((198, 162), MAINSURF, "Ichigo Kuruwa")
+    station1 = Station((198, 162), MAINSURF, "Mount Keefer")
     ctrl.entities.append(station1)
 
-    station2 = Station((882, 105), MAINSURF, "Restricted Nuclear Site 3")
+    station2 = Station((882, 105), MAINSURF, "Mount Dogger")
     ctrl.entities.append(station2)
 
-    station3 = Station((161, 410), MAINSURF, "Pippon no Pippopo Shopping District")
+    station3 = Station((161, 410), MAINSURF, "The Peaks")
     ctrl.entities.append(station3)
 
     track1 = Track(station1, station2, [(550, 250)], MAINSURF)
@@ -61,15 +61,17 @@ if map_choice == "tokyo":
     selected_stations = []
 
 if map_choice == "london":
+    bg = pygame.image.load("london.png").convert()
+    bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
     ctrl = controller.Controller(MAINSURF)
 
-    station1 = Station((382, 363), MAINSURF, "Werchestorston")
+    station1 = Station((382, 363), MAINSURF, "Wery's Pass")
     ctrl.entities.append(station1)
 
-    station2 = Station((783, 155), MAINSURF, "Chickmon-upon-Stain")
+    station2 = Station((783, 155), MAINSURF, "Johnny-Old Hill")
     ctrl.entities.append(station2)
 
-    station3 = Station((1040, 572), MAINSURF, "Piddlty Wellington III")
+    station3 = Station((1040, 572), MAINSURF, "Piddlty Wellington Summmit")
     ctrl.entities.append(station3)
 
     track1 = Track(station1, station2, [(420, 211)], MAINSURF)
@@ -100,6 +102,12 @@ if map_choice == "london":
 
     selected_stations = []
 
+if map_choice == "free":
+    bg = pygame.image.load(map_choice + ".png").convert()
+    bg = pygame.transform.scale(bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
+    ctrl = controller.Controller(MAINSURF)
+
+    selected_stations = []
 
 
 def create_station(pos, surface):
@@ -159,7 +167,7 @@ while True:  # main game loop
                 if not clicked_on_station:
                     r, g, b, a = MAINSURF.get_at(mouse_pos)
                     if b >= 230:
-                        tooltip["msg"] = "Cannot build in water"
+                        tooltip["msg"] = "CANNOUR BUILD THERE!"
                         tooltip["pos"] = mouse_pos
                         tooltip["time"] = 100
                     else:
