@@ -3,6 +3,10 @@ from math import sin, cos, pi, atan2, hypot
 from const import *
 
 
+def dist(destination, origin):
+    return hypot(destination[0] - origin[0], destination[1] - origin[1])
+
+
 class GameObject:
     pass
 
@@ -82,10 +86,13 @@ class Train(GameObject):
         return atan2(-y_dist, x_dist) % (2 * pi)
 
     def project(self):
-        if (hypot(self.destination[0] - self.x, self.destination[1] - self.y) <= 3):
-            return self.x, self.y
+        # if (hypot(self.destination[0] - self.x, self.destination[1] - self.y) <= 3):
+        #     return self.x, self.y
         return (round(self.x + (cos(self.angle) * self.speed)),
                 round(self.y - (sin(self.angle) * self.speed)))
+    
+    def at(self, destination, within=3):
+        return dist(destination, (self.x, self.y)) <= within
     
     def draw(self):
         pygame.draw.rect(self.surface, self.color, self.sprite)
@@ -94,15 +101,17 @@ class Train(GameObject):
         self.angle = self.get_angle(self.destination)
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)
-        if hypot(self.destination[0] - self.x, self.destination[1] - self.y) <= 3:
+        # if reaches the destination
+        if dist(self.destination, (self.x, self.y)) <= 3:
             self.i += 1
-            if (self.x, self.y) != (self.track.end_station.x, self.track.end_station.y):
-
-                if self.i > len(self.track.breakpoints)-1: # if out of bps, head to end station
+            # if is not at end station
+            if not self.at((self.track.end_station.x, self.track.end_station.y)):
+                # if out of bps, head to end station
+                if self.i > len(self.track.breakpoints)-1:
                     self.destination = (self.track.end_station.x, self.track.end_station.y)
                 else:
                     # else head to next bp
                     self.destination = self.track.breakpoints[self.i]
-            else:
+            else: # if at end station
                 self.i = 0
                 self.track.end_station.receive(self)
