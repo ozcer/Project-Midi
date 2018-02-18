@@ -102,7 +102,7 @@ class Station(GameObject):
     
     def tick(self, controller):
         self.pop_countdown -= self.populate_rate
-        if self.pop_countdown == 0:
+        if self.pop_countdown <= 0:
             self.pop += 1
             self.pop_countdown = 100
 

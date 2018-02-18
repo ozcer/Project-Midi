@@ -1,6 +1,7 @@
 import pygame
 from game_objects import *
 from const import *
+from random import randint
 
 from pygame.locals import *
 from const import *
@@ -53,6 +54,11 @@ class Controller():
         clock_ui = round(pygame.time.get_ticks() / 1000)
         clock_surf = money_font.render(str(clock_ui)+" seconds", True, (BLACK))
         self.surface.blit(clock_surf, (DISPLAY_WIDTH - 300, 10))
+
+        #randomized cloud movement
+        if randint(0,9) < 3:
+            print("success")
+
 
         pygame.display.update()
         Controller.fpsClock.tick(FPS)
