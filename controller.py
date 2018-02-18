@@ -57,10 +57,8 @@ class Controller():
         self.currentMoney += delta
 
     def handleExpense(self):
-    	if self.timeUntilDeduct is 0:
-    		self.currentMoney -= self.deductRate
-    		self.timeUntilDeduct = self.deductPeriod
-    	else:
-    		self.timeUntilDeduct-= 1
-
-
+        if self.timeUntilDeduct is 0:
+            self.currentMoney -= self.deductRate
+            self.timeUntilDeduct = self.deductPeriod
+        else:
+            self.timeUntilDeduct -= 1
