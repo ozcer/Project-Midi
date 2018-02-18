@@ -117,14 +117,26 @@ def clear_selected_stations(select_list):
         station.color = BLUE
     del select_list[:]
 
+tooltip = {"msg":"Welcome!", "pos":(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2), "time":200}
+ttfont = pygame.font.SysFont(None, 20)
+def draw_tooltip():
+    if tooltip["time"] > 0:
+        text_surf = ttfont.render(tooltip["msg"], True, RED)
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        mouse_y -= 10
+        MAINSURF.blit(text_surf, (mouse_x, mouse_y))
+        tooltip["time"] -= 1
+
 while True:  # main game loop
     
     #MAINSURF.fill(WHITE)
     MAINSURF.blit(bg,(0, 0))
+    draw_tooltip()
     ctrl.tick()
 
     keys = pygame.key.get_pressed()
-
+    
+    
     if keys[K_ESCAPE]:
         pygame.quit()
         sys.exit()
@@ -145,7 +157,12 @@ while True:  # main game loop
                         clicked_on_station = entity
                         selected_stations.append(clicked_on_station)
                 if not clicked_on_station:
-                    create_station(mouse_pos, MAINSURF)
+                    if MAINSURF.get_at(mouse_pos)[2] >= 240:
+                        tooltip["msg"] = "Cannot build in water"
+                        tooltip["pos"] = mouse_pos
+                        tooltip["time"] = 100
+                    else:
+                        create_station(mouse_pos, MAINSURF)
                 else:
                     clicked_on_station.color = YELLOW
                     if len(selected_stations) == 2:
