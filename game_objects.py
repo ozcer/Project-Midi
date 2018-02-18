@@ -1,5 +1,5 @@
 import pygame
-from math import sin, cos, pi, atan2
+from math import sin, cos, pi, atan2, hypot
 from const import *
 
 
@@ -37,11 +37,15 @@ class Station(GameObject):
         self.stationSize = 20
         self.surface = surface
     
-    def addTrack(self, track):
-        self.tracks.append(track)
+    def addTrack(self, track, route):
+        self.tracks[route] = track
     
     def send(self, train, track):
         train.travel_track(track)
+    
+    def receive(self, train):
+        target_track = self.tracks[train.route]
+        self.send(train, target_track)
     
     def draw(self):
         pygame.draw.rect(self.surface, (0, 0, 255), [self.x - (self.stationSize/2), self.y-(self.stationSize/2), self.stationSize, self.stationSize])
@@ -55,7 +59,10 @@ class Train(GameObject):
     
     def __init__(self, parked_station, route, surface):
         self.destination = (0,0)
-        self.speed = 1
+        
+        self.route = route
+        self.speed = 5
+        self.route = route
         self.x, self.y = parked_station.x, parked_station.y
         self.dimensions = (30, 10)
         self.angle = 0
@@ -67,9 +74,7 @@ class Train(GameObject):
         self.i = 0
         self.destination = (track.end_station.x, track.end_station.y) if len(track.breakpoints) == 0 else track.breakpoints[0]
         self.track = track
-                
-    def move(self, target_x, target_y):
-        pass
+        
     
     def get_angle(self,destination):
         x_dist = destination[0] - self.x
@@ -77,6 +82,8 @@ class Train(GameObject):
         return atan2(-y_dist, x_dist) % (2 * pi)
 
     def project(self):
+        if (hypot(self.destination[0] - self.x, self.destination[1] - self.y) <= 3):
+            return self.x, self.y
         return (round(self.x + (cos(self.angle) * self.speed)),
                 round(self.y - (sin(self.angle) * self.speed)))
     
@@ -84,15 +91,18 @@ class Train(GameObject):
         pygame.draw.rect(self.surface, self.color, self.sprite)
         
     def tick(self):
-        print(self.i, len(self.track.breakpoints))
-        print(self.x, self.y)
         self.angle = self.get_angle(self.destination)
         self.x, self.y = self.project()
         self.sprite.center = (self.x, self.y)
-        if (self.x, self.y) == self.destination:
-            print("reached!")
+        if hypot(self.destination[0] - self.x, self.destination[1] - self.y) <= 3:
             self.i += 1
-            if self.i > len(self.track.breakpoints)-1:
-                self.destination = (self.track.end_station.x, self.track.end_station.y)
+            if (self.x, self.y) != (self.track.end_station.x, self.track.end_station.y):
+
+                if self.i > len(self.track.breakpoints)-1: # if out of bps, head to end station
+                    self.destination = (self.track.end_station.x, self.track.end_station.y)
+                else:
+                    # else head to next bp
+                    self.destination = self.track.breakpoints[self.i]
             else:
-                self.destination = self.track.breakpoints[self.i]
+                self.i = 0
+                self.track.end_station.receive(self)

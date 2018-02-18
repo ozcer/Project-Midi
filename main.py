@@ -18,18 +18,30 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 ctrl = controller.Controller()
-sta1 = Station((50,50), MAINSURF)
-ctrl.entities.append(sta1)
+station1 = Station((50, 50), MAINSURF)
+ctrl.entities.append(station1)
 
-sta2 = Station((250,250), MAINSURF)
-ctrl.entities.append(sta2)
+station2 = Station((250, 250), MAINSURF)
+ctrl.entities.append(station2)
 
-trk1 = Track(sta1, sta2, [(250, 50), (200,150)], MAINSURF)
-ctrl.entities.append(trk1)
+station3 = Station((50, 250), MAINSURF)
+ctrl.entities.append(station3)
 
-trn1 = Train(sta1, "my_route", MAINSURF)
-sta1.send(trn1, trk1)
-ctrl.entities.append(trn1)
+track1 = Track(station1, station2, [(250, 50), (200, 150)], MAINSURF)
+ctrl.entities.append(track1)
+station1.addTrack(track1, "route1")
+
+track2 = Track(station2, station3, [(100, 150)], MAINSURF)
+ctrl.entities.append(track2)
+station2.addTrack(track2, "route1")
+
+track3 = Track(station3, station1, [], MAINSURF)
+ctrl.entities.append(track3)
+station3.addTrack(track3, "route1")
+
+train1 = Train(station1, "route1", MAINSURF)
+station1.receive(train1)
+ctrl.entities.append(train1)
 
 
 while True:  # main game loop
