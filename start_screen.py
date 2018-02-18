@@ -11,6 +11,7 @@ def draw_start_screen(surface, windowWidth, windowHeight):
     while inStartScreen:
 
         surface.blit(startImage, startRect)
+        message_to_screen(surface, "Press space to continue", const.BLACK)
         pygame.display.update()
 
         for event in pygame.event.get():
