@@ -1,5 +1,7 @@
 import sys
 import controller
+import const
+import start_screen
 from game_objects import *
 import pygame.locals
 
@@ -16,6 +18,7 @@ WHITE = (255, 255, 255, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
+gamestate = "START"
 
 ctrl = controller.Controller()
 station1 = Station((50, 50), MAINSURF)
@@ -44,7 +47,10 @@ station1.receive(train1)
 ctrl.entities.append(train1)
 
 
+start_screen.draw_start_screen(MAINSURF, const.DISPLAY_WIDTH, const.DISPLAY_HEIGHT)
 while True:  # main game loop
+
+
     MAINSURF.fill(WHITE)
     
     ctrl.tick()
