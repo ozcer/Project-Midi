@@ -49,8 +49,6 @@ class Controller():
                 for route in entity.tracks:
                     all_routes.add(route)
 
-        legend_text = legend_font.render("Gondola Routes: {}".format(all_routes), True, BLACK)
-        self.surface.blit(legend_text, (DISPLAY_WIDTH - 300, DISPLAY_HEIGHT-150))
 
         clock_ui = round(pygame.time.get_ticks() / 1000)
         clock_surf = money_font.render(str(clock_ui)+" seconds", True, (BLACK))
