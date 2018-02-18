@@ -123,9 +123,7 @@ def create_station(pos, surface, ctrl):
         ctrl.entities.insert(0, new_station)
         ctrl.addMoney(-COST_OF_MOUNTAIN)
     else:
-        tooltip["msg"] = "NOT ENOUGH MONEY!"
-        tooltip["pos"] = mouse_pos
-        tooltip["time"] = 50
+        end_screen.draw_end_screen(MAINSURF)
 
 
 
@@ -186,7 +184,6 @@ while True:  # main game loop
                 clicked_on_station = None
                 for entity in controller.Controller.entities:
                     if type(entity) == Station and entity.sprite.collidepoint(mouse_pos):
-                        print("clicking on station: ", entity.sprite)
                         clicked_on_station = entity
                         selected_stations.append(clicked_on_station)
                 if not clicked_on_station:
@@ -203,7 +200,7 @@ while True:  # main game loop
                         create_track(selected_stations[0], selected_stations[1], [])
                         clear_selected_stations(selected_stations)
             elif event.button == 2:
-                print(selected_stations)
+                pass
             elif event.button == 3:
                 clear_selected_stations(selected_stations)
     if ctrl.get_money() <= BANKRUPT_AMOUNT:

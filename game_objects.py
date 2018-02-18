@@ -6,12 +6,7 @@ import random
 def dist(destination, origin):
     return hypot(destination[0] - origin[0], destination[1] - origin[1])
 
-
-class GameObject:
-    pass
-
-
-class Track(GameObject):
+class Track:
     
     def __init__(self, start_station, end_station, breakpoints: (int, int), surface):
         self.breakpoints = breakpoints
@@ -32,7 +27,7 @@ class Track(GameObject):
         pygame.draw.lines(self.surface, self.color, False, point_list)
 
 
-class Station(GameObject):
+class Station:
     
     def __init__(self, pos: (int, int), surface, name="New Station"):
         self.tracks = [] # "routeName": Track
@@ -78,16 +73,15 @@ class Station(GameObject):
         pygame.draw.circle(self.surface, GRAY, (self.x, self.y), 28)
         pygame.draw.circle(self.surface, WHITE, (self.x, self.y), 13)
         pygame.draw.rect(self.surface, self.color, self.sprite)
-        text_surf = self.font.render("({},{})".format(self.x, self.y), True, (BLACK))
-        self.surface.blit(text_surf, (self.x, self.y + 10))
+        #text_surf = self.font.render("({},{})".format(self.x, self.y), True, (BLACK))
+        #self.surface.blit(text_surf, (self.x, self.y + 10))
 
         #draws population of each station
         text_surf = self.font.render("Passenger: " + str(self.pop), True, BLACK)
-        self.surface.blit(text_surf, (self.x, self.y + 25))
+        self.surface.blit(text_surf, (self.x, self.y + 15))
 
         #draw station names
         stationfont = pygame.font.SysFont(None, 30)
-        stationfont.set_underline(True)
         text_surf = stationfont.render(self.name, True, BLACK)
         self.surface.blit(text_surf, (self.x - 60, self.y - 40))
 

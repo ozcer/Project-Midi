@@ -2,7 +2,6 @@ import pygame
 from game_objects import *
 from const import *
 from random import randint
-
 from pygame.locals import *
 from const import *
 
@@ -20,12 +19,12 @@ class Controller():
         self.deductRate = 1000
         self.timeUntilDeduct = 1000
         self.deductPeriod = 1800
+        self.positive = None
 
 
     def tick(self):
         self.handleExpense()
         for entity in Controller.entities:
-            print(entity)
             entity.tick(self)
             entity.draw()
 
@@ -50,9 +49,19 @@ class Controller():
                     all_routes.add(route)
 
 
-        clock_ui = round(pygame.time.get_ticks() / 1000)
-        clock_surf = money_font.render(str(clock_ui)+" seconds", True, (BLACK))
-        self.surface.blit(clock_surf, (DISPLAY_WIDTH - 300, 10))
+        snow_ui = random.randint(0,100)
+        snow_surf = money_font.render(str(snow_ui)+" inch/second", True, (BLACK))
+        warning_font = pygame.font.SysFont(None, 80)
+        if self.positive == None:
+            warning_surf = warning_font.render("CLOCK :|", True, YELLOW)
+        if snow_ui == 51 or snow_ui == 32 or self.positive == False:
+            warning_surf = warning_font.render("CLOCK LOW :(", True, RED)
+            self.positive = True
+        elif snow_ui == 25 or snow_ui == 31 or self.positive == True:
+            warning_surf = warning_font.render("CLOCK HIGH :)", True, GREEN)
+            self.positive = False
+        self.surface.blit(warning_surf, (DISPLAY_WIDTH - 900, 10))
+
 
         #randomized cloud generation
         if randint(0, 200) == 0:
