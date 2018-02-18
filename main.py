@@ -19,13 +19,13 @@ ctrl = controller.Controller()
 station1 = Station((50, 50), MAINSURF)
 ctrl.entities.append(station1)
 
-station2 = Station((250, 250), MAINSURF)
+station2 = Station((600, 250), MAINSURF)
 ctrl.entities.append(station2)
 
 station3 = Station((50, 250), MAINSURF)
 ctrl.entities.append(station3)
 
-track1 = Track(station1, station2, [(250, 50), (200, 150)], MAINSURF)
+track1 = Track(station1, station2, [(700, 50)], MAINSURF)
 ctrl.entities.append(track1)
 station1.addTrack(track1, "route1")
 
@@ -37,9 +37,22 @@ track3 = Track(station3, station1, [], MAINSURF)
 ctrl.entities.append(track3)
 station3.addTrack(track3, "route1")
 
+track4 = Track(station3, station1, [], MAINSURF)
+ctrl.entities.append(track4)
+station3.addTrack(track4, "short")
+track5 = Track(station1, station3, [], MAINSURF)
+ctrl.entities.append(track5)
+station1.addTrack(track5, "short")
+
 train1 = Train(station1, "route1", MAINSURF)
 station1.receive(train1)
 ctrl.entities.append(train1)
+
+train2 = Train(station3, "short", MAINSURF)
+station3.receive(train2)
+
+ctrl.entities.append(train2)
+
 
 
 start_screen.draw_start_screen(MAINSURF, DISPLAY_WIDTH, DISPLAY_HEIGHT)

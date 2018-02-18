@@ -65,7 +65,7 @@ class Train(GameObject):
         self.destination = (0,0)
         
         self.route = route
-        self.speed = 5
+        self.speed = 3
         self.route = route
         self.x, self.y = parked_station.x, parked_station.y
         self.dimensions = (30, 10)
@@ -75,7 +75,7 @@ class Train(GameObject):
         self.color = GREEN
 
     def travel_track(self, track):
-        self.i = 0
+        self.break_point_index = 0
         self.destination = (track.end_station.x, track.end_station.y) if len(track.breakpoints) == 0 else track.breakpoints[0]
         self.track = track
         
@@ -103,15 +103,15 @@ class Train(GameObject):
         self.sprite.center = (self.x, self.y)
         # if reaches the destination
         if dist(self.destination, (self.x, self.y)) <= 3:
-            self.i += 1
+            self.break_point_index += 1
             # if is not at end station
             if not self.at((self.track.end_station.x, self.track.end_station.y)):
                 # if out of bps, head to end station
-                if self.i > len(self.track.breakpoints)-1:
+                if self.break_point_index > len(self.track.breakpoints)-1:
                     self.destination = (self.track.end_station.x, self.track.end_station.y)
                 else:
                     # else head to next bp
-                    self.destination = self.track.breakpoints[self.i]
+                    self.destination = self.track.breakpoints[self.break_point_index]
             else: # if at end station
-                self.i = 0
+                self.break_point_index = 0
                 self.track.end_station.receive(self)
