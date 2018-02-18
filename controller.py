@@ -16,9 +16,9 @@ class Controller():
     def __init__(self, surf):
         self.surface = surf
         self.currentMoney = 0
-        self.deductRate = 5000
-        self.timeUntilDeduct = 0
-        self.deductPeriod = 180
+        self.deductRate = 1000
+        self.timeUntilDeduct = 1800
+        self.deductPeriod = 1800
 
 
     def tick(self):
