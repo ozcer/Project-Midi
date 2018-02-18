@@ -181,7 +181,7 @@ class Train(pygame.sprite.Sprite):
                          (self.x, self.y), self.get_head_pos(), self.dimensions[1])
         text_surf = self.font.render("speed: {}".format(self.speed), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 25))
-        text_surf = self.font.render("current cap: {}/{}".format(self.train_pop, self.max_capacity), True, (BLACK))
+        text_surf = self.font.render("Passenger: {}/{}".format(self.train_pop, self.max_capacity), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 40))
         
     def tick(self, controller):
