@@ -40,6 +40,8 @@ class Station(GameObject):
         self.dimensions = (20,20)
         self.sprite = pygame.Rect(self.x, self.y, *self.dimensions)
         self.surface = surface
+        self.populateRate = 0.01
+        self.populateCounter = 0
         
         self.color = BLUE
         self.font = pygame.font.SysFont(None, 20)
@@ -63,9 +65,14 @@ class Station(GameObject):
         text_surf = self.font.render("pos: " + str(self.x)+", "+str(self.y), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 10))
 
+        #draws population of each station
+        [i, d] = divmod(self.populateCounter, 1)
+        text_surf = self.font.render(str(i), True, BLACK)
+        self.surface.blit(text_surf, (self.x, self.y + 25))
+
     
     def tick(self, controller):
-        pass
+        self.populateCounter += self.populateRate
     
 
 class Train(GameObject):
