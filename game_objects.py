@@ -237,8 +237,8 @@ class Cloud():
         self.surface = surface
         self.y = random.randint(0, DISPLAY_HEIGHT)
         self.x = -600
-        self.velocity = randint(1, 5)
-        self.img = pygame.transform.scale(CLOUD, (randint(150,200), randint(50,100)))
+        self.velocity = random.randint(1, 5)
+        self.img = pygame.transform.scale(CLOUD, (random.randint(150,200), random.randint(50,100)))
         self.rect = self.img.get_rect()
 
 
