@@ -103,6 +103,9 @@ class Train(GameObject):
             self.wait_time -= 1
             self.speed = 0
             self.color = RED
+        elif self.at((self.track.end_station.x, self.track.end_station.y), 75) or self.at((self.track.start_station.x, self.track.start_station.y), 75):
+            self.speed = 2
+            self.color = YELLOW
         else:
             self.speed = 4
             self.color = GREEN
