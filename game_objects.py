@@ -1,6 +1,7 @@
 import pygame
 from math import sin, cos, pi, atan2, hypot
 from const import *
+import random
 
 def dist(destination, origin):
     return hypot(destination[0] - origin[0], destination[1] - origin[1])
@@ -33,8 +34,8 @@ class Track(GameObject):
 
 class Station(GameObject):
     
-    def __init__(self, pos: (int, int), surface, name="New Gondola"):
-        self.tracks = {} # "routeName": Track
+    def __init__(self, pos: (int, int), surface, name="New Station"):
+        self.tracks = [] # "routeName": Track
         self.x = pos[0]
         self.y = pos[1]
         self.dimensions = (20,10)
@@ -42,8 +43,6 @@ class Station(GameObject):
         self.surface = surface
         self.name = name
         self.color = BLUE
-
-
 
         #passenger info
         self.populate_rate = POP_RATE
@@ -54,8 +53,8 @@ class Station(GameObject):
         self.font = pygame.font.SysFont(None, 20)
         self.moneyMessage = ["dummy", -1]
         
-    def addTrack(self, track, route):
-        self.tracks[route] = track
+    def addTrack(self, track):
+        self.tracks.append(track)
     
     def send(self, train, track):
         train.travel_track(track)
@@ -67,8 +66,8 @@ class Station(GameObject):
         controller.addMoney(money_delta)
         # print(controller.currentMoney)
         train.wait_time = FPS
-        target_track = self.tracks[train.route]
-        self.send(train, target_track)
+        random_track = random.choice(self.tracks)
+        self.send(train, random_track)
         if money_delta > 0:
             self.moneyMessage = [str(money_delta), 25]
 
@@ -117,7 +116,7 @@ class Station(GameObject):
 
 class Train(pygame.sprite.Sprite):
     
-    def __init__(self, parked_station, route, surface):
+    def __init__(self, parked_station, surface):
         super().__init__()
         
         self.image = pygame.Surface((30, 10))
@@ -125,14 +124,12 @@ class Train(pygame.sprite.Sprite):
         
         self.destination = (0,0)
         self.wait_time = 0
-        self.route = route
         
         self.max_speed = 3
         self.min_speed = .5
         self.speed = 0
         self.accel = .1
         
-        self.route = route
         self.x, self.y = parked_station.x, parked_station.y
         self.dimensions = (30, 10)
         self.angle = 0
@@ -183,9 +180,6 @@ class Train(pygame.sprite.Sprite):
     def draw(self):
         pygame.draw.line(self.surface, self.color,
                          (self.x, self.y), self.get_head_pos(), self.dimensions[1])
-        #pygame.draw.rect(self.surface, self.color, self.sprite)
-        text_surf = self.font.render("route: {}".format(self.route), True, (BLACK))
-        self.surface.blit(text_surf, (self.x, self.y + 10))
         text_surf = self.font.render("speed: {}".format(self.speed), True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 25))
         text_surf = self.font.render("current cap: {}/{}".format(self.train_pop, self.max_capacity), True, (BLACK))

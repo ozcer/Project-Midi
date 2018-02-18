@@ -34,26 +34,26 @@ if map_choice == "tokyo":
 
     track1 = Track(station1, station2, [(550, 250)], MAINSURF)
     ctrl.entities.append(track1)
-    station1.addTrack(track1, "full")
+    station1.addTrack(track1)
 
     track2 = Track(station2, station3, [(500, 500)], MAINSURF)
     ctrl.entities.append(track2)
-    station2.addTrack(track2, "full")
+    station2.addTrack(track2)
 
     track3 = Track(station3, station1, [], MAINSURF)
     ctrl.entities.append(track3)
-    station3.addTrack(track3, "full")
-    station3.addTrack(track3, "short")
+    station3.addTrack(track3)
+    station3.addTrack(track3)
 
     track5 = Track(station1, station3, [], MAINSURF)
     ctrl.entities.append(track5)
-    station1.addTrack(track5, "short")
+    station1.addTrack(track5)
 
-    train1 = Train(station1, "full", MAINSURF)
+    train1 = Train(station1, MAINSURF)
     station1.receive(train1, ctrl)
     ctrl.entities.append(train1)
 
-    train2 = Train(station3, "short", MAINSURF)
+    train2 = Train(station3, MAINSURF)
     station3.receive(train2, ctrl)
 
     ctrl.entities.append(train2)
@@ -76,26 +76,26 @@ if map_choice == "london":
 
     track1 = Track(station1, station2, [(420, 211)], MAINSURF)
     ctrl.entities.append(track1)
-    station1.addTrack(track1, "full")
+    station1.addTrack(track1)
 
     track2 = Track(station2, station3, [(911, 402)], MAINSURF)
     ctrl.entities.append(track2)
-    station2.addTrack(track2, "full")
+    station2.addTrack(track2)
 
     track3 = Track(station3, station1, [(660,623)], MAINSURF)
     ctrl.entities.append(track3)
-    station3.addTrack(track3, "full")
-    station3.addTrack(track3, "short")
+    station3.addTrack(track3)
+    station3.addTrack(track3)
 
     track5 = Track(station1, station3, [], MAINSURF)
     ctrl.entities.append(track5)
-    station1.addTrack(track5, "short")
+    station1.addTrack(track5)
 
-    train1 = Train(station1, "full", MAINSURF)
+    train1 = Train(station1, MAINSURF)
     station1.receive(train1, ctrl)
     ctrl.entities.append(train1)
 
-    train2 = Train(station3, "short", MAINSURF)
+    train2 = Train(station3, MAINSURF)
     station3.receive(train2, ctrl)
 
     ctrl.entities.append(train2)
@@ -118,6 +118,7 @@ def create_station(pos, surface):
 def create_track(start, end, breakpoints, surface=MAINSURF):
     new_track = Track(start, end, [], surface)
     ctrl.entities.append(new_track)
+    start.addTrack(new_track)
 
 
 def clear_selected_stations(select_list):
