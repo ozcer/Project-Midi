@@ -156,7 +156,7 @@ class Train(pygame.sprite.Sprite):
         self.surface.blit(text_surf, (self.x, self.y + 10))
         text_surf = self.font.render(f"speed: {self.speed}", True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 25))
-        text_surf = self.font.render(f"current cap: {self.train_pop}", True, (BLACK))
+        text_surf = self.font.render(f"current cap: {self.train_pop}/{self.max_capacity}", True, (BLACK))
         self.surface.blit(text_surf, (self.x, self.y + 40))
         
     def tick(self, controller):
@@ -170,12 +170,20 @@ class Train(pygame.sprite.Sprite):
         else:
             self.speed = self.speed + self.accel if self.speed < self.max_speed else self.max_speed
         
-        if self.speed == 0:
-            self.color = RED
-        elif self.speed < self.max_speed:
+        # if self.speed == 0:
+        #     self.color = RED
+        # elif self.speed < self.max_speed:
+        #     self.color = YELLOW
+        # else:
+        #     self.color = GREEN
+        capacity_ratio = self.train_pop/self.max_capacity
+        if capacity_ratio >= 0.9:
+            self.color  = RED
+        elif capacity_ratio >= 0.4 and capacity_ratio < 0.9:
             self.color = YELLOW
-        else:
+        elif capacity_ratio < 0.4:
             self.color = GREEN
+
         
         self.speed = round(self.speed, 2)
         
