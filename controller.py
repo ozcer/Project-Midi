@@ -13,7 +13,7 @@ class Controller():
     def __init__(self, surf):
         self.surface = surf
         self.currentMoney = 0
-        self.incomeRate = 100
+        self.incomeRate = 25
 
     def tick(self):
         for entity in Controller.entities:
@@ -31,5 +31,5 @@ class Controller():
         pygame.display.update()
         Controller.fpsClock.tick(FPS)
 
-    def addMoney(self):
-        self.currentMoney += self.incomeRate
+    def addMoney(self, passCount):
+        self.currentMoney += self.incomeRate * passCount

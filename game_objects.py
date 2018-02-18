@@ -53,7 +53,9 @@ class Station(GameObject):
         train.travel_track(track)
     
     def receive(self, train, controller):
-        controller.addMoney()
+        [i, d] = divmod(self.populateCounter, 1)
+        controller.addMoney(i)
+        self.populateCounter -= i
         print(controller.currentMoney)
         train.wait_time = FPS
         target_track = self.tracks[train.route]
